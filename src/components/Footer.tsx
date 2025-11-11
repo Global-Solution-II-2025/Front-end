@@ -3,7 +3,7 @@ import { FiMail } from "react-icons/fi";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-gradient-to-b from-gray-900 to-black text-gray-300 pt-10 pb-6 mt-10 border-t border-gray-800">
+    <footer className="w-full bg-gray-900 text-gray-300 pt-10 pb-6 mt-10 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Logo e descrição */}
         <div>
@@ -18,10 +18,10 @@ export default function Footer() {
         <div>
           <h3 className="text-lg font-semibold text-white mb-3">Links úteis</h3>
           <ul className="space-y-2 text-sm">
-            <li><a href="/trilhas" className="hover:text-indigo-400 transition-colors">Trilhas de Aprendizado</a></li>
-            <li><a href="/cursos" className="hover:text-indigo-400 transition-colors">Catálogo de Cursos</a></li>
+            <li><a href="/trilhas" className="hover:text-indigo-400 transition-colors">Integrantes</a></li>
+            <li><a href="/cursos" className="hover:text-indigo-400 transition-colors">FAQ</a></li>
             <li><a href="/sobre" className="hover:text-indigo-400 transition-colors">Sobre Nós</a></li>
-            <li><a href="/ajuda" className="hover:text-indigo-400 transition-colors">Central de Ajuda</a></li>
+            <li><a href="/ajuda" className="hover:text-indigo-400 transition-colors">Suporte</a></li>
           </ul>
         </div>
 

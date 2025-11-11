@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FiUser } from "react-icons/fi";
 import Menu from "./Menu";
-import logo from "../assets/logo.png";
+import logo from "../assets/favicon.png";
 import { useEffect, useState } from "react";
 
 export default function Header() {
@@ -25,7 +25,7 @@ export default function Header() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <img src={logo} alt="Logo Portal" className="h-10 w-10" />
-          <h1 className="text-xl md:text-2xl font-semibold text-indigo-700">
+          <h1 className="text-xl md:text-2xl font-semibold text-blue-600">
             NeuralUp
           </h1>
         </Link>
