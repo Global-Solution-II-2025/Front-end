@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Logo e descrição */}
         <div>
-          <h2 className="text-2xl font-bold text-indigo-400 mb-2">Pathly</h2>
+          <h2 className="text-2xl font-bold text-indigo-400 mb-2">NeuralUp</h2>
           <p className="text-sm text-gray-400 leading-relaxed">
             Plataforma de aprendizado inteligente com trilhas personalizadas, 
             IA leve e recomendações sob medida para seu crescimento profissional.
