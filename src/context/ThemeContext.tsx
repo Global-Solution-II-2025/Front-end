@@ -1,51 +1,56 @@
 import { createContext, useState, useEffect, type ReactNode } from "react";
 import type { ThemeContextType } from "./../types/themeContext";
 
-//Criamos o bilhete mágico
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-//Aqui criamos a pessoa que vai dar o bilhete para todo
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    // inicializa a partir do localStorage ou da preferência do sistema
-    const getInitial = () => {
-        try {
-            const stored = localStorage.getItem("theme");
-            if (stored === "dark") return true;
-            if (stored === "light") return false;
-            return (
-                typeof window !== "undefined" &&
-                window.matchMedia &&
-                window.matchMedia("(prefers-color-scheme: dark)").matches
-            );
-        } catch {
-            return false;
-        }
-    };
+  // Pega o tema inicial: localStorage > preferência do sistema
+  const getInitial = () => {
+    if (typeof window === "undefined") return false;
+    try {
+      const stored = localStorage.getItem("theme");
+      if (stored === "dark") return true;
+      if (stored === "light") return false;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    } catch {
+      return false;
+    }
+  };
 
-    const [isDark, setisDark] = useState<boolean>(getInitial);
+  const [isDark, setIsDark] = useState<boolean>(getInitial);
 
-    // persiste e sincroniza a classe no <html>
-    useEffect(() => {
-            try {
-                localStorage.setItem("theme", isDark ? "dark" : "light");
-            } catch {
-                // ignore write errors (e.g., storage disabled)
-            }
-        if (typeof document !== "undefined" && document.documentElement) {
-            document.documentElement.classList.toggle("dark-mode", isDark);
-            document.documentElement.classList.toggle("light-mode", !isDark);
-        }
-    }, [isDark]);
+  // Atualiza classe no <html> e localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    } catch {}
 
-    const toggleTheme = () => {
-        setisDark((prevIsDark) => !prevIsDark);
-    };
+    const html = document.documentElement;
+    if (isDark) {
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+    }
+  }, [isDark]);
 
-    return (
-        <ThemeContext.Provider value={{ isDark, toggleTheme }}>
-            {children}
-        </ThemeContext.Provider>
-    );
+  // Escuta mudanças na preferência do sistema
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
+
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
+
+  const toggleTheme = () => setIsDark(prev => !prev);
+
+  return (
+    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 };
 
 export default ThemeContext;
