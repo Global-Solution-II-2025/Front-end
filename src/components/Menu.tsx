@@ -2,63 +2,62 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 
+/**
+ * Menu de navegação principal do portal.
+ * - Links para as principais seções
+ * - Menu colapsável no mobile
+ * - Destaque para a rota ativa
+ */
 export default function Menu() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
 
   const links = [
     { to: "/", label: "Início" },
-    { to: "/trilhas", label: "Trilhas" },
-    { to: "/cursos", label: "Cursos" },
-    { to: "/ia", label: "IA Inteligente" },
-    { to: "/sobre", label: "Sobre" },
+    { to: "/trilhas", label: "Minha rotina" },
+    { to: "/cursos", label: "Notícias" },
   ];
 
   return (
-    <header className="w-full bg-white dark:bg-gray-900 shadow-md transition-colors duration-300 fixed top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
-        {/* Logo ou título */}
-        <div className="text-xl font-bold text-gray-800 dark:text-gray-100">Portal</div>
+    <div className="relative">
+      {/* Botão de abrir/fechar no mobile */}
+      <button
+        className="md:hidden text-2xl text-indigo-600 focus:outline-none"
+        onClick={() => setOpen(!open)}
+        aria-label="Abrir menu"
+      >
+        {open ? <FiX /> : <FiMenu />}
+      </button>
 
-        {/* Botão mobile */}
-        <button
-          className="md:hidden text-2xl text-indigo-600 dark:text-indigo-400 focus:outline-none"
-          onClick={() => setOpen(!open)}
-          aria-label="Abrir menu"
-        >
-          {open ? <FiX /> : <FiMenu />}
-        </button>
-
-        {/* Menu desktop */}
-        <nav className="hidden md:flex gap-6 items-center text-base font-medium">
-          {links.map(({ to, label }) => (
-            <Link
-              key={to}
-              to={to}
-              className={`transition-colors duration-300 px-2 py-1 rounded-md ${
-                location.pathname === to
-                  ? "text-indigo-600 dark:text-indigo-400 font-semibold"
-                  : "text-gray-800 dark:text-gray-200 hover:text-indigo-500 dark:hover:text-indigo-300"
-              }`}
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
-      </div>
+      {/* Menu normal (desktop) */}
+      <nav className="hidden md:flex gap-6 items-center text-base font-medium">
+        {links.map(({ to, label }) => (
+          <Link
+            key={to}
+            to={to}
+            className={`transition-colors duration-300 ${
+              location.pathname === to
+                ? "text-indigo-600 font-semibold"
+                : "text-gray-700 hover:text-indigo-500"
+            }`}
+          >
+            {label}
+          </Link>
+        ))}
+      </nav>
 
       {/* Menu mobile */}
       {open && (
-        <nav className="md:hidden w-full bg-white dark:bg-gray-900 shadow-lg border-t border-gray-200 dark:border-gray-700 flex flex-col">
+        <nav className="absolute top-12 left-0 w-48 bg-white shadow-lg rounded-lg flex flex-col gap-2 py-3 px-4 md:hidden border border-gray-100 z-40 animate-fadeIn">
           {links.map(({ to, label }) => (
             <Link
               key={to}
               to={to}
               onClick={() => setOpen(false)}
-              className={`block py-3 px-4 transition-colors duration-200 ${
+              className={`block py-2 px-2 rounded-md transition-colors duration-200 ${
                 location.pathname === to
-                  ? "bg-indigo-100 dark:bg-indigo-700 text-indigo-600 dark:text-indigo-200 font-semibold"
-                  : "text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  ? "bg-indigo-100 text-indigo-600 font-semibold"
+                  : "text-gray-800 hover:bg-gray-100"
               }`}
             >
               {label}
@@ -66,6 +65,6 @@ export default function Menu() {
           ))}
         </nav>
       )}
-    </header>
+    </div>
   );
 }
