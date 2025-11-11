@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FiUser } from "react-icons/fi";
 import Menu from "./Menu";
-import logo from "../../public/logo.png";
+import logo from "../assets/logo.png";
 
 export default function Header() {
   return (
