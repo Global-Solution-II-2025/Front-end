@@ -8,6 +8,7 @@ import Sobre from "../pages/Sobre";
 import Login from "../pages/Login";
 import Termos from "../pages/Termos";
 import Privacidade from "../pages/Privacidade";
+import FAQ from "../pages/faq";
 
 export default function AppRoutes() {
   const isLoggedIn = localStorage.getItem("token");
@@ -29,6 +30,7 @@ export default function AppRoutes() {
         <Route path="sobre" element={<Sobre />} />
         <Route path="termos" element={<Termos />} />
         <Route path="privacidade" element={<Privacidade />} />
+        <Route path="faq" element={<FAQ />} />
       </Route>
 
       {/* Redireciona tudo que não existe */}

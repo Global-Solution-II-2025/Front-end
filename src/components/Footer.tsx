@@ -1,5 +1,6 @@
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
+import { Link } from "react-router-dom";
 import { useTheme } from "../context/useTheme";
 
 export default function Footer() {
@@ -8,7 +9,9 @@ export default function Footer() {
   return (
     <footer
       className={`w-full pt-10 pb-6 mt-10 border-t transition-colors duration-500 ${
-        isDark ? "bg-gray-900 border-gray-800 text-gray-300" : "bg-gray-50 border-gray-200 text-gray-800"
+        isDark
+          ? "bg-gray-900 border-gray-800 text-gray-300"
+          : "bg-gray-50 border-gray-200 text-gray-800"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -33,48 +36,64 @@ export default function Footer() {
 
         {/* Links úteis */}
         <div>
-          <h3 className={`text-lg font-semibold mb-3 transition-colors duration-500 ${isDark ? "text-gray-100" : "text-gray-900"}`}>
+          <h3
+            className={`text-lg font-semibold mb-3 transition-colors duration-500 ${
+              isDark ? "text-gray-100" : "text-gray-900"
+            }`}
+          >
             Links úteis
           </h3>
           <ul className="space-y-2 text-sm">
             <li>
-              <a
-                href="/trilhas"
-                className={`transition-colors duration-500 hover:text-indigo-400 ${isDark ? "text-gray-300" : "text-gray-700"}`}
+              <Link
+                to="/integrantes"
+                className={`transition-colors duration-500 hover:text-indigo-400 ${
+                  isDark ? "text-gray-300" : "text-gray-700"
+                }`}
               >
                 Integrantes
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/cursos"
-                className={`transition-colors duration-500 hover:text-indigo-400 ${isDark ? "text-gray-300" : "text-gray-700"}`}
+              <Link
+                to="/faq"
+                className={`transition-colors duration-500 hover:text-indigo-400 ${
+                  isDark ? "text-gray-300" : "text-gray-700"
+                }`}
               >
                 FAQ
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/sobre"
-                className={`transition-colors duration-500 hover:text-indigo-400 ${isDark ? "text-gray-300" : "text-gray-700"}`}
+              <Link
+                to="/sobre"
+                className={`transition-colors duration-500 hover:text-indigo-400 ${
+                  isDark ? "text-gray-300" : "text-gray-700"
+                }`}
               >
                 Sobre Nós
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/ajuda"
-                className={`transition-colors duration-500 hover:text-indigo-400 ${isDark ? "text-gray-300" : "text-gray-700"}`}
+              <Link
+                to="/ajuda"
+                className={`transition-colors duration-500 hover:text-indigo-400 ${
+                  isDark ? "text-gray-300" : "text-gray-700"
+                }`}
               >
                 Suporte
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
 
         {/* Contato */}
         <div>
-          <h3 className={`text-lg font-semibold mb-3 transition-colors duration-500 ${isDark ? "text-gray-100" : "text-gray-900"}`}>
+          <h3
+            className={`text-lg font-semibold mb-3 transition-colors duration-500 ${
+              isDark ? "text-gray-100" : "text-gray-900"
+            }`}
+          >
             Contato
           </h3>
           <ul className="space-y-2 text-sm">
@@ -87,7 +106,11 @@ export default function Footer() {
                 team@neuralup.com
               </a>
             </li>
-            <li className={`transition-colors duration-500 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
+            <li
+              className={`transition-colors duration-500 ${
+                isDark ? "text-gray-400" : "text-gray-600"
+              }`}
+            >
               São Paulo, SP — Brasil
             </li>
           </ul>
@@ -95,23 +118,20 @@ export default function Footer() {
 
         {/* Redes sociais */}
         <div>
-          <h3 className={`text-lg font-semibold mb-3 transition-colors duration-500 ${isDark ? "text-gray-100" : "text-gray-900"}`}>
+          <h3
+            className={`text-lg font-semibold mb-3 transition-colors duration-500 ${
+              isDark ? "text-gray-100" : "text-gray-900"
+            }`}
+          >
             Siga-nos
           </h3>
           <div className="flex gap-4 text-xl">
-            {[{
-              href: "https://facebook.com",
-              icon: <FaFacebookF />
-            },{
-              href: "https://instagram.com",
-              icon: <FaInstagram />
-            },{
-              href: "https://linkedin.com",
-              icon: <FaLinkedinIn />
-            },{
-              href: "https://github.com",
-              icon: <FaGithub />
-            }].map((social, i) => (
+            {[
+              { href: "https://facebook.com", icon: <FaFacebookF /> },
+              { href: "https://instagram.com", icon: <FaInstagram /> },
+              { href: "https://linkedin.com", icon: <FaLinkedinIn /> },
+              { href: "https://github.com", icon: <FaGithub /> },
+            ].map((social, i) => (
               <a
                 key={i}
                 href={social.href}
@@ -129,7 +149,9 @@ export default function Footer() {
       {/* Linha divisória */}
       <div
         className={`mt-10 pt-4 text-center text-sm transition-colors duration-500 ${
-          isDark ? "text-gray-400 border-t border-gray-800" : "text-gray-500 border-t border-gray-200"
+          isDark
+            ? "text-gray-400 border-t border-gray-800"
+            : "text-gray-500 border-t border-gray-200"
         }`}
       >
         © {new Date().getFullYear()} NeuralUp — Todos os direitos reservados.
