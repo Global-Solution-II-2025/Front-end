@@ -81,10 +81,10 @@ export default function Footer() {
             <li className="flex items-center gap-2">
               <FiMail className="text-indigo-400" />
               <a
-                href="mailto:team@pathly.com"
+                href="mailto:team@neuralup.com"
                 className="transition-colors duration-500 hover:text-indigo-400"
               >
-                team@pathly.com
+                team@neuralup.com
               </a>
             </li>
             <li className={`transition-colors duration-500 ${isDark ? "text-gray-400" : "text-gray-600"}`}>
@@ -132,7 +132,7 @@ export default function Footer() {
           isDark ? "text-gray-400 border-t border-gray-800" : "text-gray-500 border-t border-gray-200"
         }`}
       >
-        © {new Date().getFullYear()} Pathly — Todos os direitos reservados.
+        © {new Date().getFullYear()} NeuralUp — Todos os direitos reservados.
       </div>
     </footer>
   );
