@@ -1,4 +1,4 @@
-export default function Crusos() {
+export default function Noticias() {
     return (
         <div>
             Cursos Page
