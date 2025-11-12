@@ -33,17 +33,21 @@ export default function Header() {
 
   return (
     <header
-      className={`w-full shadow-md sticky top-0 z-50 transition-colors duration-300 ${
-        isHighContrast
-          ? "bg-white dark:bg-black high-contrast"
-          : "bg-white dark:bg-gray-900"
+      className={`w-full shadow-md sticky top-0 z-50 transition-colors duration-500 ${
+        isDark
+          ? "bg-gray-900 text-gray-200"
+          : "bg-gray-50 text-gray-800"
       }`}
     >
       <div className="max-w-7xl mx-auto flex justify-between items-center py-3 px-6">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <img src={logo} alt="Logo NeuralUp" className="h-10 w-10" />
-          <h1 className="text-xl md:text-2xl font-semibold text-blue-600 dark:text-indigo-400">
+          <h1
+            className={`text-xl md:text-2xl font-semibold transition-colors duration-500 ${
+              isDark ? "text-indigo-400" : "text-blue-600"
+            }`}
+          >
             NeuralUp
           </h1>
         </Link>
@@ -59,7 +63,9 @@ export default function Header() {
             <>
               <Link
                 to="/usuario"
-                className="font-medium text-gray-700 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                className={`font-medium transition-colors duration-500 ${
+                  isDark ? "text-gray-200 hover:text-indigo-400" : "text-gray-700 hover:text-indigo-600"
+                }`}
               >
                 Olá, {nome.split(" ")[0]}
               </Link>
@@ -67,38 +73,48 @@ export default function Header() {
               {/* Botão de Configurações */}
               <button
                 onClick={() => setMenuAberto(!menuAberto)}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                className={`p-2 rounded-full transition-colors duration-500 ${
+                  isDark ? "hover:bg-gray-800" : "hover:bg-gray-100"
+                }`}
                 aria-label="Configurações"
               >
-                <FiSettings className="text-xl text-gray-600 dark:text-gray-300" />
+                <FiSettings className={`text-xl transition-colors duration-500 ${isDark ? "text-gray-300" : "text-gray-600"}`} />
               </button>
 
               {/* Menu Configurações */}
               {menuAberto && (
-                <div className="absolute right-0 top-12 w-56 bg-white dark:bg-gray-800 shadow-lg rounded-lg border border-gray-100 dark:border-gray-700 z-50 animate-fadeIn">
+                <div
+                  className={`absolute right-0 top-12 w-56 shadow-lg rounded-lg border transition-colors duration-500 z-50 ${
+                    isDark
+                      ? "bg-gray-800 border-gray-700"
+                      : "bg-white border-gray-100"
+                  } animate-fadeIn`}
+                >
                   <div className="flex flex-col py-2">
-                    <button className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition">
-                      <span className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
-                        <FiGlobe /> Idioma
-                      </span>
+                    <button className={`flex items-center justify-between px-4 py-2 transition-colors duration-500 ${
+                      isDark ? "hover:bg-gray-700 text-gray-200" : "hover:bg-gray-50 text-gray-700"
+                    }`}>
+                      <span className="flex items-center gap-2"><FiGlobe /> Idioma</span>
                       <span className="text-sm text-gray-500">PT-BR</span>
                     </button>
 
                     {/* Alternar tema */}
                     <button
                       onClick={toggleTheme}
-                      className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+                      className={`flex items-center justify-between px-4 py-2 transition-colors duration-500 ${
+                        isDark ? "hover:bg-gray-700 text-gray-200" : "hover:bg-gray-50 text-gray-700"
+                      }`}
                     >
-                      <span className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+                      <span className="flex items-center gap-2">
                         {isDark ? <FiSun /> : <FiMoon />} Tema
                       </span>
                       <div
-                        className={`w-10 h-5 flex items-center rounded-full p-1 transition ${
+                        className={`w-10 h-5 flex items-center rounded-full p-1 transition-colors duration-500 ${
                           isDark ? "bg-indigo-500" : "bg-gray-300"
                         }`}
                       >
                         <div
-                          className={`bg-white w-4 h-4 rounded-full shadow-md transform transition ${
+                          className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-500 ${
                             isDark ? "translate-x-5" : ""
                           }`}
                         ></div>
@@ -108,18 +124,20 @@ export default function Header() {
                     {/* Alternar contraste */}
                     <button
                       onClick={toggleContrast}
-                      className="flex items-center justify-between px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+                      className={`flex items-center justify-between px-4 py-2 transition-colors duration-500 ${
+                        isDark ? "hover:bg-gray-700 text-gray-200" : "hover:bg-gray-50 text-gray-700"
+                      }`}
                     >
-                      <span className="flex items-center gap-2 text-gray-700 dark:text-gray-200">
+                      <span className="flex items-center gap-2">
                         {isHighContrast ? <FiEyeOff /> : <FiEye />} Contraste
                       </span>
                       <div
-                        className={`w-10 h-5 flex items-center rounded-full p-1 transition ${
+                        className={`w-10 h-5 flex items-center rounded-full p-1 transition-colors duration-500 ${
                           isHighContrast ? "bg-indigo-500" : "bg-gray-300"
                         }`}
                       >
                         <div
-                          className={`bg-white w-4 h-4 rounded-full shadow-md transform transition ${
+                          className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-500 ${
                             isHighContrast ? "translate-x-5" : ""
                           }`}
                         ></div>
@@ -128,7 +146,7 @@ export default function Header() {
 
                     <button
                       onClick={handleLogout}
-                      className="flex items-center gap-2 px-4 py-2 text-red-500 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                      className="flex items-center gap-2 px-4 py-2 text-red-500 hover:bg-gray-50 transition-colors duration-500"
                     >
                       <FiLogOut /> Sair
                     </button>
@@ -139,7 +157,11 @@ export default function Header() {
           ) : (
             <Link
               to="/login"
-              className="flex items-center gap-2 bg-indigo-600 dark:bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-400 transition-all"
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-colors duration-500 ${
+                isDark
+                  ? "bg-indigo-500 hover:bg-indigo-400 text-white"
+                  : "bg-indigo-600 hover:bg-indigo-700 text-white"
+              }`}
             >
               <FiUser />
               Entrar
@@ -149,7 +171,11 @@ export default function Header() {
       </div>
 
       {/* Menu Mobile */}
-      <div className="md:hidden border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 px-4 py-2">
+      <div
+        className={`md:hidden border-t transition-colors duration-500 ${
+          isDark ? "border-gray-700 bg-gray-900" : "border-gray-200 bg-gray-50"
+        } px-4 py-2`}
+      >
         <Menu />
       </div>
     </header>
