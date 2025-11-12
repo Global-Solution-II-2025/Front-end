@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { FiMail, FiLock, FiUser, FiCalendar, FiEye, FiEyeOff } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import loginBg from "../assets/login-bg.jpg";
+import { useTheme } from "../context/useTheme";
 
 export default function Login() {
+  const { isDark } = useTheme();
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -19,19 +21,14 @@ export default function Login() {
     aceitarTermos: false,
   });
 
-  // 🔹 “Simulação” de arquivo JSON local via localStorage
   const getUsuarios = () => JSON.parse(localStorage.getItem("usuariosDB") || "[]");
   const saveUsuarios = (usuarios: any[]) =>
     localStorage.setItem("usuariosDB", JSON.stringify(usuarios, null, 2));
 
-    useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem("token");
-    // se já estiver logado, só redireciona uma vez
-    if (token) {
-        navigate("/", { replace: true });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    if (token) navigate("/", { replace: true });
+  }, [navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
@@ -90,7 +87,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className={`min-h-screen flex ${isDark ? "bg-gray-900" : "bg-white"} transition-colors duration-500`}>
       {/* Lado da imagem */}
       <div
         className="hidden lg:flex w-1/2 bg-cover bg-center"
@@ -98,9 +95,17 @@ export default function Login() {
       />
 
       {/* Lado do formulário */}
-      <div className="flex-1 flex flex-col justify-center items-center p-8 sm:p-12 bg-gradient-to-br from-white to-indigo-50">
-        <div className="w-full max-w-md bg-white shadow-xl rounded-xl p-8 border border-gray-100">
-          <h2 className="text-2xl font-semibold text-center text-indigo-700 mb-6">
+      <div
+        className={`flex-1 flex flex-col justify-center items-center p-8 sm:p-12 transition-colors duration-500 ${
+          isDark ? "bg-gray-900" : "bg-gradient-to-br from-white to-indigo-50"
+        }`}
+      >
+        <div
+          className={`w-full max-w-md rounded-xl p-8 border shadow-xl transition-colors duration-500 ${
+            isDark ? "bg-gray-800 border-gray-700 text-gray-100" : "bg-white border-gray-100 text-gray-800"
+          }`}
+        >
+          <h2 className={`text-2xl font-semibold text-center mb-6 transition-colors duration-500 ${isDark ? "text-indigo-400" : "text-indigo-700"}`}>
             {isRegister ? "Crie sua conta" : "Bem-vindo(a) de volta"}
           </h2>
 
@@ -109,14 +114,18 @@ export default function Login() {
               <>
                 <div>
                   <label className="text-sm font-medium">Nome completo</label>
-                  <div className="flex items-center border rounded-lg px-3">
+                  <div
+                    className={`flex items-center border rounded-lg px-3 transition-colors duration-500 ${
+                      isDark ? "border-gray-600 bg-gray-700" : "border-gray-300 bg-white"
+                    }`}
+                  >
                     <FiUser className="text-gray-400" />
                     <input
                       type="text"
                       name="nome"
                       value={form.nome}
                       onChange={handleChange}
-                      className="w-full p-2 outline-none"
+                      className="w-full p-2 outline-none bg-transparent text-current"
                       required
                     />
                   </div>
@@ -124,14 +133,18 @@ export default function Login() {
 
                 <div>
                   <label className="text-sm font-medium">Data de nascimento</label>
-                  <div className="flex items-center border rounded-lg px-3">
+                  <div
+                    className={`flex items-center border rounded-lg px-3 transition-colors duration-500 ${
+                      isDark ? "border-gray-600 bg-gray-700" : "border-gray-300 bg-white"
+                    }`}
+                  >
                     <FiCalendar className="text-gray-400" />
                     <input
                       type="date"
                       name="dataNascimento"
                       value={form.dataNascimento}
                       onChange={handleChange}
-                      className="w-full p-2 outline-none"
+                      className="w-full p-2 outline-none bg-transparent text-current"
                       required
                     />
                   </div>
@@ -139,37 +152,47 @@ export default function Login() {
               </>
             )}
 
+            {/* E-mail */}
             <div>
               <label className="text-sm font-medium">E-mail</label>
-              <div className="flex items-center border rounded-lg px-3">
+              <div
+                className={`flex items-center border rounded-lg px-3 transition-colors duration-500 ${
+                  isDark ? "border-gray-600 bg-gray-700" : "border-gray-300 bg-white"
+                }`}
+              >
                 <FiMail className="text-gray-400" />
                 <input
                   type="email"
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  className="w-full p-2 outline-none"
+                  className="w-full p-2 outline-none bg-transparent text-current"
                   required
                 />
               </div>
             </div>
 
+            {/* Senha */}
             <div>
               <label className="text-sm font-medium">Senha</label>
-              <div className="flex items-center border rounded-lg px-3">
+              <div
+                className={`flex items-center border rounded-lg px-3 transition-colors duration-500 ${
+                  isDark ? "border-gray-600 bg-gray-700" : "border-gray-300 bg-white"
+                }`}
+              >
                 <FiLock className="text-gray-400" />
                 <input
                   type={showPassword ? "text" : "password"}
                   name="senha"
                   value={form.senha}
                   onChange={handleChange}
-                  className="w-full p-2 outline-none"
+                  className="w-full p-2 outline-none bg-transparent text-current"
                   required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="text-gray-500 hover:text-indigo-600"
+                  className="text-gray-500 hover:text-indigo-600 transition-colors duration-300"
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
@@ -180,14 +203,18 @@ export default function Login() {
               <>
                 <div>
                   <label className="text-sm font-medium">Confirmação de senha</label>
-                  <div className="flex items-center border rounded-lg px-3">
+                  <div
+                    className={`flex items-center border rounded-lg px-3 transition-colors duration-500 ${
+                      isDark ? "border-gray-600 bg-gray-700" : "border-gray-300 bg-white"
+                    }`}
+                  >
                     <FiLock className="text-gray-400" />
                     <input
                       type={showPassword ? "text" : "password"}
                       name="confirmarSenha"
                       value={form.confirmarSenha}
                       onChange={handleChange}
-                      className="w-full p-2 outline-none"
+                      className="w-full p-2 outline-none bg-transparent text-current"
                       required
                     />
                   </div>
@@ -219,14 +246,18 @@ export default function Login() {
 
             <button
               type="submit"
-              className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-lg transition-all"
+              className={`w-full py-2 rounded-lg font-medium transition-colors duration-300 ${
+                isDark
+                  ? "bg-indigo-500 hover:bg-indigo-600 text-gray-100"
+                  : "bg-indigo-600 hover:bg-indigo-700 text-white"
+              }`}
               disabled={loading}
             >
               {loading ? "Carregando..." : isRegister ? "Cadastrar" : "Entrar"}
             </button>
           </form>
 
-          <p className="text-sm text-center mt-5 text-gray-600">
+          <p className={`text-sm text-center mt-5 transition-colors duration-500 ${isDark ? "text-gray-300" : "text-gray-600"}`}>
             {isRegister ? "Já tem uma conta?" : "Ainda não tem uma conta?"}{" "}
             <button
               onClick={() => setIsRegister(!isRegister)}
