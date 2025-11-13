@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home";
-import Cursos from "../pages/Noticias";
-import Sobre from "../pages/Sobre";
+import Cursos from "../pages/News";
+import Sobre from "../pages/About";
 import Login from "../pages/Login";
 import Termos from "../pages/Terms";
 import Privacidade from "../pages/Privacy";
