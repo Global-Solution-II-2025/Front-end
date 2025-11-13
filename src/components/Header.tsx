@@ -106,7 +106,7 @@ export default function Header() {
                       }`}
                     >
                       <span className="flex items-center gap-2">
-                        {isDark ? <FiSun /> : <FiMoon />} Tema
+                        {isDark ? <FiMoon /> : <FiSun />} Tema
                       </span>
                       <div
                         className={`w-10 h-5 flex items-center rounded-full p-1 transition-colors duration-500 ${
@@ -146,7 +146,7 @@ export default function Header() {
 
                     <button
                       onClick={handleLogout}
-                      className="flex items-center gap-2 px-4 py-2 text-red-500 hover:bg-gray-50 transition-colors duration-500"
+                      className="flex items-center gap-2 px-4 py-2 text-red-500 hover:bg-gray-700 transition-colors duration-500"
                     >
                       <FiLogOut /> Sair
                     </button>
