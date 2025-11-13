@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home";
 import Trilhas from "../pages/Trilhas";
-import Cursos from "../pages/Noticias";
+import Cursos from "../pages/News";
 import Sobre from "../pages/About";
 import Login from "../pages/Login";
 import Termos from "../pages/Terms";
