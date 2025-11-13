@@ -16,7 +16,7 @@ export default function Menu() {
 
   const links = [
     { to: "/", label: "Início" },
-    { to: "/trilhas", label: "Minha rotina" },
+    { to: "/chatbot", label: "Nora IA" },
     { to: "/cursos", label: "Notícias" },
   ];
 
