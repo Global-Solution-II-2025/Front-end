@@ -76,12 +76,12 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                to="/ajuda"
+                to="/contato"
                 className={`transition-colors duration-500 hover:text-indigo-400 ${
                   isDark ? "text-gray-300" : "text-gray-700"
                 }`}
               >
-                Suporte
+                Contato
               </Link>
             </li>
           </ul>
