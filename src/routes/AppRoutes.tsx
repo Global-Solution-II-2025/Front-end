@@ -6,7 +6,7 @@ import Cursos from "../pages/Noticias";
 import Sobre from "../pages/Sobre";
 import Login from "../pages/Login";
 import Termos from "../pages/Termos";
-import Privacidade from "../pages/Privacidade";
+import Privacidade from "../pages/Privacy";
 import FAQ from "../pages/faq";
 import Integrantes from "../pages/integrantes";
 import Contact from "../pages/Contact"; // 
