@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home";
-import Trilhas from "../pages/NoraIA";
 import Cursos from "../pages/Noticias";
 import Sobre from "../pages/Sobre";
 import Login from "../pages/Login";
@@ -10,6 +9,7 @@ import Privacidade from "../pages/Privacidade";
 import FAQ from "../pages/faq";
 import Integrantes from "../pages/integrantes";
 import Contact from "../pages/Contact"; // 
+import Chatbot from "../pages/NoraIA";
 
 export default function AppRoutes() {
   const isLoggedIn = localStorage.getItem("token");
@@ -25,7 +25,7 @@ export default function AppRoutes() {
         element={isLoggedIn ? <App /> : <Navigate to="/login" replace />}
       >
         <Route index element={<Home />} />
-        <Route path="trilhas" element={<Trilhas />} />
+        <Route path="chatbot" element={<Chatbot />} />
         <Route path="cursos" element={<Cursos />} />
         <Route path="sobre" element={<Sobre />} />
         <Route path="termos" element={<Termos />} />
