@@ -3,7 +3,7 @@ import App from "../App";
 import Home from "../pages/Home";
 import Trilhas from "../pages/Trilhas";
 import Cursos from "../pages/Noticias";
-import Sobre from "../pages/Sobre";
+import Sobre from "../pages/About";
 import Login from "../pages/Login";
 import Termos from "../pages/Termos";
 import Privacidade from "../pages/Privacy";
