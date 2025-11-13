@@ -9,7 +9,7 @@ export default function Contact() {
       className={`min-h-screen py-16 px-6 text-center transition-colors duration-500 ${
         isDark
           ? "bg-gray-900 text-gray-200"
-          : "bg-gradient-to-b from-blue-50 to-white text-gray-900"
+          : "bg-linear-to-b from-blue-50 to-white text-gray-900"
       }`}
     >
       <h1

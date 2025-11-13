@@ -55,8 +55,8 @@ export default function Integrantes() {
             key={index}
             className={`relative group flex flex-col items-center rounded-3xl shadow-2xl p-8 transition-transform duration-500 transform hover:scale-105 hover:-translate-y-3 overflow-hidden ${
               isDark
-                ? "bg-gradient-to-tr from-gray-800 to-gray-700 text-gray-200"
-                : "bg-gradient-to-tr from-white to-gray-100 text-gray-900"
+                ? "bg-linear-to-tr from-gray-800 to-gray-700 text-gray-200"
+                : "bg-llinear-to-tr from-white to-gray-100 text-gray-900"
             }`}
           >
             {/* Imagem */}
