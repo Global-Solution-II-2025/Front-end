@@ -9,6 +9,7 @@ import Login from "../pages/Login";
 import Termos from "../pages/Termos";
 import Privacidade from "../pages/Privacidade";
 import FAQ from "../pages/faq";
+import Integrantes from "../pages/integrantes";
 
 export default function AppRoutes() {
   const isLoggedIn = localStorage.getItem("token");
@@ -31,6 +32,7 @@ export default function AppRoutes() {
         <Route path="termos" element={<Termos />} />
         <Route path="privacidade" element={<Privacidade />} />
         <Route path="faq" element={<FAQ />} />
+        <Route path="integrantes" element={<Integrantes />} />
       </Route>
 
       {/* Redireciona tudo que não existe */}
