@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchNoticias } from "../api/gnews.ts";
 import type { Noticia } from "../types/gnews";
-import { useTheme } from "../context/useTheme";
+import { useTheme } from "../context/useTheme.ts";
 
 export default function Noticias() {
   const { isDark } = useTheme();
