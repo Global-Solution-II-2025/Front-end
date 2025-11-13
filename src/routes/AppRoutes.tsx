@@ -3,7 +3,6 @@ import App from "../App";
 import Home from "../pages/Home";
 import Trilhas from "../pages/Trilhas";
 import Cursos from "../pages/Noticias";
-import Inteligencia from "../pages/Inteligencia";
 import Sobre from "../pages/Sobre";
 import Login from "../pages/Login";
 import Termos from "../pages/Termos";
@@ -27,7 +26,6 @@ export default function AppRoutes() {
         <Route index element={<Home />} />
         <Route path="trilhas" element={<Trilhas />} />
         <Route path="cursos" element={<Cursos />} />
-        <Route path="ia" element={<Inteligencia />} />
         <Route path="sobre" element={<Sobre />} />
         <Route path="termos" element={<Termos />} />
         <Route path="privacidade" element={<Privacidade />} />
