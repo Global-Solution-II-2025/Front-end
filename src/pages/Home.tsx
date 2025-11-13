@@ -49,7 +49,7 @@ export default function Home() {
                 : "border-blue-600 text-blue-600 hover:bg-blue-50"
             }`}
           >
-            Ver rotina
+            Ver notícias
           </a>
         </div>
       </section>
