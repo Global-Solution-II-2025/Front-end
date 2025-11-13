@@ -5,7 +5,7 @@ import Trilhas from "../pages/Trilhas";
 import Cursos from "../pages/Noticias";
 import Sobre from "../pages/About";
 import Login from "../pages/Login";
-import Termos from "../pages/Termos";
+import Termos from "../pages/Terms";
 import Privacidade from "../pages/Privacy";
 import FAQ from "../pages/faq";
 import Integrantes from "../pages/Members";
