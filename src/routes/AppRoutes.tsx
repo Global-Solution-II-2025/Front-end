@@ -8,7 +8,7 @@ import Login from "../pages/Login";
 import Termos from "../pages/Termos";
 import Privacidade from "../pages/Privacy";
 import FAQ from "../pages/faq";
-import Integrantes from "../pages/integrantes";
+import Integrantes from "../pages/Members";
 import Contact from "../pages/Contact"; // 
 
 export default function AppRoutes() {
