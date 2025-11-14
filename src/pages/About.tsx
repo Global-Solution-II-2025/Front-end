@@ -13,6 +13,7 @@ import {
   CartesianGrid,
   Legend,
 } from "recharts";
+import { Link } from "react-router-dom";
 
 export default function About() {
   const { isDark } = useTheme();
@@ -61,8 +62,8 @@ export default function About() {
           }`}
         >
           O NeuralUp nasceu com a missão de transformar a forma como aprendemos,
-          utilizando tecnologia e estratégias adaptadas — para reduzir
-          ausências, melhorar engajamento e apoiar a evolução profissional.
+          utilizando tecnologia e estratégias adaptadas — para reduzir ausências,
+          melhorar engajamento e apoiar a evolução profissional.
         </p>
       </section>
 
@@ -72,7 +73,7 @@ export default function About() {
           {
             title: "Missão",
             icon: "🎯",
-            desc: "Potencializar o aprendizado personalizado e acessível para todos, com foco em resultado e bem‑estar digital.",
+            desc: "Potencializar o aprendizado personalizado e acessível para todos, com foco em resultado e bem-estar digital.",
           },
           {
             title: "Visão",
@@ -213,7 +214,7 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {[
             { number: "5,8%", label: "Taxa de desemprego no Brasil (2º tri/2025)" },
-            { number: "8,7M", label: "Jovens de 14‑29 anos sem ensino médio completo" },
+            { number: "8,7M", label: "Jovens de 14-29 anos sem ensino médio completo" },
             { number: "≈18 dias", label: "Média anual de faltas escolares (absenteísmo)" },
           ].map((item, i) => (
             <div
@@ -252,7 +253,7 @@ export default function About() {
             isDark ? "text-indigo-400" : "text-indigo-600"
           }`}
         >
-          Junte‑se ao Futuro da Aprendizagem!
+          Junte-se ao Futuro da Aprendizagem!
         </h2>
         <p
           className={`max-w-2xl mx-auto mb-8 ${
@@ -262,12 +263,12 @@ export default function About() {
           Explore caminhos mais eficientes de estudo, engajamento e crescimento
           — torne o digital um aliado estratégico para você.
         </p>
-        <a
-          href="/contact"
+        <Link
+          to="/contato"
           className="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-indigo-500/30"
         >
           Fale Conosco
-        </a>
+        </Link>
       </section>
     </div>
   );
