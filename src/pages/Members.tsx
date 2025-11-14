@@ -22,8 +22,8 @@ const integrantes: Integrante[] = [
     linkedin: "https://linkedin.com/in/luizflosi",
   },
   {
-    name: "Pedro Brum",
-    role: "Designer UI/UX",
+    name: "Pedro Henrique Brum",
+    role: "Desenvolvedor Backend",
     description:
       "Criando experiências visuais incríveis e intuitivas para todos os usuários.",
     image: "#",
