@@ -16,7 +16,7 @@ const integrantes: Integrante[] = [
     name: "Luiz Felipe Flosi",
     role: "Desenvolvedor Backend",
     description:
-      "Especialista em sistemas e APIs, garantindo que tudo funcione de forma escalável.",
+      "Especialista em sistemas e implementação de API, garantindo que tudo funcione de forma escalável.",
     image: "#",
     github: "https://github.com/luizflosi",
     linkedin: "https://linkedin.com/in/luizflosi",
