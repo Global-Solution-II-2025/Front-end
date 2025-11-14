@@ -19,7 +19,7 @@ const integrantes: Integrante[] = [
       "Especialista em sistemas e implementação de API, garantindo que tudo funcione de forma escalável.",
     image: "#",
     github: "https://github.com/luizflosi",
-    linkedin: "https://linkedin.com/in/luizflosi",
+    linkedin: "https://www.linkedin.com/in/felipeflosii/",
   },
   {
     name: "Pedro Henrique Brum",
