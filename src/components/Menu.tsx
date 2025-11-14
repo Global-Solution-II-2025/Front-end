@@ -3,12 +3,7 @@ import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useTheme } from "../context/useTheme";
 
-/**
- * Menu de navegação principal do portal.
- * - Links para as principais seções
- * - Menu colapsável no mobile
- * - Destaque para a rota ativa
- */
+
 export default function Menu() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
@@ -41,9 +36,9 @@ export default function Menu() {
             to={to}
             className={`transition-colors duration-500 ${
               location.pathname === to
-                ? "text-indigo-600 font-semibold"
+                ? "text-[#00c295] font-semibold"
                 : isDark
-                ? "text-gray-300 hover:text-indigo-400"
+                ? "text-gray-300 hover:text-[#00A67E]"
                 : "text-gray-700 hover:text-indigo-500"
             }`}
           >

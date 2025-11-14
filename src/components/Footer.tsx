@@ -10,7 +10,7 @@ export default function Footer() {
     <footer
       className={`w-full pt-10 pb-6 mt-10 border-t transition-colors duration-500 ${
         isDark
-          ? "bg-gray-900 border-gray-800 text-gray-300"
+          ? "bg-[#0A0A0A] border-[#1A1A1A] text-gray-300"
           : "bg-gray-50 border-gray-200 text-gray-800"
       }`}
     >
@@ -19,7 +19,7 @@ export default function Footer() {
         <div>
           <h2
             className={`text-2xl font-bold mb-2 transition-colors duration-500 ${
-              isDark ? "text-indigo-400" : "text-indigo-600"
+              isDark ? "text-[#00A67E]" : "text-indigo-600"
             }`}
           >
             NeuralUp
@@ -47,7 +47,7 @@ export default function Footer() {
             <li>
               <Link
                 to="/integrantes"
-                className={`transition-colors duration-500 hover:text-indigo-400 ${
+                className={`transition-colors duration-500 hover:text-[#00A67E] ${
                   isDark ? "text-gray-300" : "text-gray-700"
                 }`}
               >
@@ -57,7 +57,7 @@ export default function Footer() {
             <li>
               <Link
                 to="/faq"
-                className={`transition-colors duration-500 hover:text-indigo-400 ${
+                className={`transition-colors duration-500 hover:text-[#00A67E] ${
                   isDark ? "text-gray-300" : "text-gray-700"
                 }`}
               >
@@ -67,7 +67,7 @@ export default function Footer() {
             <li>
               <Link
                 to="/sobre"
-                className={`transition-colors duration-500 hover:text-indigo-400 ${
+                className={`transition-colors duration-500 hover:text-[#00A67E] ${
                   isDark ? "text-gray-300" : "text-gray-700"
                 }`}
               >
@@ -77,7 +77,7 @@ export default function Footer() {
             <li>
               <Link
                 to="/contato"
-                className={`transition-colors duration-500 hover:text-indigo-400 ${
+                className={`transition-colors duration-500 hover:text-[#00A67E] ${
                   isDark ? "text-gray-300" : "text-gray-700"
                 }`}
               >
@@ -98,10 +98,10 @@ export default function Footer() {
           </h3>
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2">
-              <FiMail className="text-indigo-400" />
+              <FiMail className="text-[#00A67E]" />
               <a
                 href="mailto:team@neuralup.com"
-                className="transition-colors duration-500 hover:text-indigo-400"
+                className="transition-colors duration-500 hover:text-[#00A67E]"
               >
                 team@neuralup.com
               </a>
@@ -137,7 +137,7 @@ export default function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noreferrer"
-                className="transition-colors duration-500 hover:text-indigo-400"
+                className="transition-colors duration-500 hover:text-[#00A67E]"
               >
                 {social.icon}
               </a>
@@ -150,7 +150,7 @@ export default function Footer() {
       <div
         className={`mt-10 pt-4 text-center text-sm transition-colors duration-500 ${
           isDark
-            ? "text-gray-400 border-t border-gray-800"
+            ? "text-[#2A2A2A] border-t border-[#2A2A2A]"
             : "text-gray-500 border-t border-gray-200"
         }`}
       >

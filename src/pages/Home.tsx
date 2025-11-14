@@ -196,7 +196,7 @@ export default function Home() {
               key={i}
               className={`px-5 py-2 rounded-full border text-sm transition-colors duration-500 cursor-pointer ${
                 isDark
-                  ? "border-gray-600 text-gray-300 hover:bg-gray-800"
+                  ? "border-gray-100 text-gray-100 hover:bg-[#2A2A2A]"
                   : "border-gray-300 text-gray-700 hover:bg-gray-100"
               }`}
             >
