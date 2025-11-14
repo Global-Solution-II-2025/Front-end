@@ -18,7 +18,7 @@ const integrantes: Integrante[] = [
     description:
       "Especialista em sistemas e implementação de API, garantindo que tudo funcione de forma escalável.",
     image: "#",
-    github: "https://github.com/luizflosi",
+    github: "https://github.com/felipeflosii",
     linkedin: "https://www.linkedin.com/in/felipeflosii/",
   },
   {
