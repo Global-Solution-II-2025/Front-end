@@ -27,7 +27,7 @@ const integrantes: Integrante[] = [
     description:
       "Especialista em desenvolvimento API e fanático por Java.",
     image: "#",
-    github: "https://github.com/pedrobrum",
+    github: "https://github.com/PedroBrum-DEV",
     linkedin: "https://linkedin.com/in/pedrobrum",
   },
 ];
