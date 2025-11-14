@@ -1,9 +1,14 @@
+import axios from "axios";
+
 const API_URL = "http://127.0.0.1:8000/api";
 
 export interface Question {
   id: number;
   question: string;
-  options: { text: string; weights: { [key: string]: number } }[];
+  options: {
+    text: string;
+    weights: { [key: string]: number };
+  }[];
 }
 
 export interface ChatState {
@@ -15,14 +20,10 @@ export interface ChatState {
 }
 
 export async function startChat(session_id: string): Promise<ChatState> {
-  const response = await fetch(`${API_URL}/start-chat?session_id=${encodeURIComponent(session_id)}`);
-  
-  if (!response.ok) {
-    throw new Error("Erro ao iniciar o chat");
-  }
-
-  const data: ChatState = await response.json();
-  return data;
+  const response = await axios.get<ChatState>(`${API_URL}/start-chat`, {
+    params: { session_id },
+  });
+  return response.data;
 }
 
 export async function submitAnswer(
@@ -30,22 +31,10 @@ export async function submitAnswer(
   question_id: number,
   option_index: number
 ): Promise<ChatState> {
-  const response = await fetch(`${API_URL}/submit-answer`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      session_id,
-      question_id,
-      option_index,
-    }),
+  const response = await axios.post<ChatState>(`${API_URL}/submit-answer`, {
+    session_id,
+    question_id,
+    option_index,
   });
-
-  if (!response.ok) {
-    throw new Error("Erro ao enviar a resposta");
-  }
-
-  const data: ChatState = await response.json();
-  return data;
+  return response.data;
 }
