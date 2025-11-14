@@ -25,7 +25,7 @@ const integrantes: Integrante[] = [
     name: "Pedro Henrique Brum",
     role: "Desenvolvedor Backend",
     description:
-      "Criando experiências visuais incríveis e intuitivas para todos os usuários.",
+      "Especialista em desenvolvimento API e fanático por Java.",
     image: "#",
     github: "https://github.com/pedrobrum",
     linkedin: "https://linkedin.com/in/pedrobrum",
