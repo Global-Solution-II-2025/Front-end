@@ -9,8 +9,8 @@ const integrantes: Integrante[] = [
     description:
       "Apaixonado por tecnologia e UX, focado em criar interfaces limpas e interativas.",
     image: "#",
-    github: "https://github.com/arthurbrito",
-    linkedin: "https://linkedin.com/in/arthurbrito",
+    github: "https://github.com/thubrito",
+    linkedin: "https://www.linkedin.com/in/arthur-brito-da-silva-06658b276/",
   },
   {
     name: "Luiz Felipe Flosi",
