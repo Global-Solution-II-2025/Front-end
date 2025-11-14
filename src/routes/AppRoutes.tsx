@@ -8,7 +8,7 @@ import Termos from "../pages/Terms";
 import Privacidade from "../pages/Privacy";
 import FAQ from "../pages/faq";
 import Integrantes from "../pages/Members";
-import Contact from "../pages/Contact"; // 
+import Contact from "../pages/Contact";
 import Chatbot from "../pages/NoraIA";
 
 export default function AppRoutes() {
