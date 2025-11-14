@@ -9,26 +9,26 @@ const integrantes: Integrante[] = [
     description:
       "Apaixonado por tecnologia e UX, focado em criar interfaces limpas e interativas.",
     image: "#",
-    github: "https://github.com/arthurbrito",
-    linkedin: "https://linkedin.com/in/arthurbrito",
+    github: "https://github.com/thubrito",
+    linkedin: "https://www.linkedin.com/in/arthur-brito-da-silva-06658b276/",
   },
   {
     name: "Luiz Felipe Flosi",
     role: "Desenvolvedor Backend",
     description:
-      "Especialista em sistemas e APIs, garantindo que tudo funcione de forma escalável.",
+      "Especialista em sistemas e implementação de API, garantindo que tudo funcione de forma escalável.",
     image: "#",
-    github: "https://github.com/luizflosi",
-    linkedin: "https://linkedin.com/in/luizflosi",
+    github: "https://github.com/felipeflosii",
+    linkedin: "https://www.linkedin.com/in/felipeflosii/",
   },
   {
-    name: "Pedro Brum",
-    role: "Designer UI/UX",
+    name: "Pedro Henrique Brum",
+    role: "Desenvolvedor Backend",
     description:
-      "Criando experiências visuais incríveis e intuitivas para todos os usuários.",
+      "Especialista em desenvolvimento API e fanático por Java.",
     image: "#",
-    github: "https://github.com/pedrobrum",
-    linkedin: "https://linkedin.com/in/pedrobrum",
+    github: "https://github.com/PedroBrum-DEV",
+    linkedin: "https://www.linkedin.com/in/pedro-brum-66a31b326/",
   },
 ];
 
