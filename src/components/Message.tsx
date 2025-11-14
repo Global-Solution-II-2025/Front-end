@@ -3,8 +3,8 @@ import React from 'react';
 interface MessageProps {
   text: string;
   isUser: boolean;
-  name?: string;  // Nome opcional (para IA)
-  avatar?: string;  // URL do avatar opcional (para IA)
+  name?: string; 
+  avatar?: string;  
 }
 
 const Message: React.FC<MessageProps> = ({ text, isUser, name, avatar }) => {
