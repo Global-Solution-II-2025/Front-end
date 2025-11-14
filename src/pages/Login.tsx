@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { FiMail, FiLock, FiUser, FiCalendar, FiEye, FiEyeOff } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import loginBg from "../assets/login-bg.jpg";
 import { useTheme } from "../context/useTheme";
 
@@ -230,13 +230,13 @@ export default function Login() {
                   />
                   <label>
                     Aceito os{" "}
-                    <a href="/termos" className="text-indigo-600 underline">
+                    <Link to="/termos" className="text-indigo-600 underline">
                       Termos de Uso
-                    </a>{" "}
+                    </Link>{" "}
                     e{" "}
-                    <a href="/privacidade" className="text-indigo-600 underline">
+                    <Link to="/privacidade" className="text-indigo-600 underline">
                       Política de Privacidade
-                    </a>
+                    </Link>
                   </label>
                 </div>
               </>
