@@ -25,7 +25,7 @@ export default function About() {
     { name: "Autodidata/Leitura", value: 10 },
   ];
 
- const cores = ["#00A67E", "#008C69", "#33B89A", "#66CAA7"];
+  const cores = ["#00A67E", "#008C69", "#33B89A", "#66CAA7"];
 
   const evolucaoTaxaDesemprego = [
     { mes: "Jan/25", taxa: 7.0 },
@@ -145,10 +145,14 @@ export default function About() {
               </Pie>
               <Tooltip
                 contentStyle={{
-                  backgroundColor: isDark ? "#1f2937" : "#fff",
-                  color: isDark ? "#e5e7eb" : "#111827",
+                  backgroundColor: isDark ? "#2A2A2A" : "#fff",
+                  color: isDark ? "#00A67E" : "#111827",
                   borderRadius: "8px",
                   border: "none",
+                  boxShadow: isDark ? "0 0 10px #00A67E50" : "0 0 10px #00000020",
+                }}
+                itemStyle={{
+                  color: isDark ? "#33B89A" : "#111827",
                 }}
               />
             </PieChart>
