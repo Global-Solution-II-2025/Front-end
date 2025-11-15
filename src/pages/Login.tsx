@@ -53,7 +53,6 @@ export default function Login() {
     const usuarios = getUsuarios();
     const exists = usuarios.find((u: any) => u.email === form.email);
     if (exists) throw new Error("E-mail já cadastrado.");
-v
     const novoUsuario = {
       nome: form.nome,
       email: form.email,
