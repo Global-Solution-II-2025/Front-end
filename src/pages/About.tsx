@@ -25,7 +25,7 @@ export default function About() {
     { name: "Autodidata/Leitura", value: 10 },
   ];
 
-  const cores = ["#6366F1", "#4F46E5", "#A78BFA", "#818CF8"];
+ const cores = ["#00A67E", "#008C69", "#33B89A", "#66CAA7"];
 
   const evolucaoTaxaDesemprego = [
     { mes: "Jan/25", taxa: 7.0 },
@@ -40,28 +40,28 @@ export default function About() {
   return (
     <div
       className={`min-h-screen transition-colors duration-500 ${
-        isDark ? "bg-gray-900 text-gray-200" : "bg-gray-50 text-gray-900"
+        isDark ? "bg-[#1A1A1A] text-gray-200" : "bg-gray-50 text-gray-900"
       }`}
     >
       {/* Hero */}
       <section
         className={`relative flex flex-col items-center justify-center py-24 px-6 text-center transition-colors duration-500 ${
-          isDark ? "bg-gray-800" : "bg-indigo-50"
+          isDark ? "bg-[#1A1A1A]" : "bg-indigo-50"
         }`}
       >
         <h1
           className={`text-5xl font-extrabold mb-6 ${
-            isDark ? "text-indigo-400" : "text-indigo-600"
+            isDark ? "text-[#00A67E]" : "text-indigo-600"
           }`}
         >
-          Sobre o NeuralUp 🚀
+          Sobre a NeuralUp
         </h1>
         <p
           className={`max-w-3xl text-lg ${
             isDark ? "text-gray-300" : "text-gray-600"
           }`}
         >
-          O NeuralUp nasceu com a missão de transformar a forma como aprendemos,
+          A NeuralUp nasceu com a missão de transformar a forma como aprendemos,
           utilizando tecnologia e estratégias adaptadas — para reduzir ausências,
           melhorar engajamento e apoiar a evolução profissional.
         </p>
@@ -89,13 +89,13 @@ export default function About() {
           <div
             key={i}
             className={`rounded-3xl shadow-2xl p-10 hover:scale-105 transition-transform duration-500 ${
-              isDark ? "bg-gray-800" : "bg-white"
+              isDark ? "bg-[#2A2A2A]" : "bg-white"
             }`}
           >
             <div className="text-6xl mb-6">{item.icon}</div>
             <h3
               className={`text-2xl font-bold mb-4 ${
-                isDark ? "text-indigo-400" : "text-indigo-600"
+                isDark ? "text-[#00A67E]" : "text-indigo-600"
               }`}
             >
               {item.title}
@@ -115,12 +115,12 @@ export default function About() {
       <section className="max-w-7xl mx-auto py-20 px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div
           className={`rounded-3xl shadow-2xl p-8 ${
-            isDark ? "bg-gray-800" : "bg-white"
+            isDark ? "bg-[#2A2A2A]" : "bg-white"
           }`}
         >
           <h3
             className={`text-2xl font-bold mb-6 ${
-              isDark ? "text-indigo-400" : "text-indigo-600"
+              isDark ? "text-[#00A67E]" : "text-indigo-600"
             }`}
           >
             Distribuição de Métodos de Aprendizagem
@@ -157,12 +157,12 @@ export default function About() {
 
         <div
           className={`rounded-3xl shadow-2xl p-8 ${
-            isDark ? "bg-gray-800" : "bg-white"
+            isDark ? "bg-[#2A2A2A]" : "bg-white"
           }`}
         >
           <h3
             className={`text-2xl font-bold mb-6 ${
-              isDark ? "text-indigo-400" : "text-indigo-600"
+              isDark ? "text-[#00A67E]" : "text-indigo-600"
             }`}
           >
             Evolução da Taxa de Desemprego no Brasil (%)
@@ -177,7 +177,7 @@ export default function About() {
               <YAxis stroke={isDark ? "#ccc" : "#555"} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: isDark ? "#1f2937" : "#fff",
+                  backgroundColor: isDark ? "#3A3A3A" : "#fff",
                   color: isDark ? "#e5e7eb" : "#111827",
                   borderRadius: "8px",
                   border: "none",
@@ -187,7 +187,7 @@ export default function About() {
               <Line
                 type="monotone"
                 dataKey="taxa"
-                stroke="#6366F1"
+                stroke="#00A67E"
                 strokeWidth={3}
               />
             </LineChart>
@@ -206,10 +206,10 @@ export default function About() {
       <section className="max-w-7xl mx-auto py-20 px-6 text-center">
         <h2
           className={`text-4xl font-extrabold mb-12 ${
-            isDark ? "text-indigo-400" : "text-indigo-600"
+            isDark ? "text-[#00A67E]" : "text-indigo-600"
           }`}
         >
-          Impactos Reais 🌟
+          Impactos Reais
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {[
@@ -220,12 +220,12 @@ export default function About() {
             <div
               key={i}
               className={`rounded-3xl shadow-2xl p-10 hover:scale-105 transition-transform duration-500 ${
-                isDark ? "bg-gray-800" : "bg-white"
+                isDark ? "bg-[#2A2A2A]" : "bg-white"
               }`}
             >
               <h3
                 className={`text-4xl font-bold mb-2 ${
-                  isDark ? "text-indigo-400" : "text-indigo-500"
+                  isDark ? "text-gray-200" : "text-indigo-500"
                 }`}
               >
                 {item.number}
@@ -245,12 +245,12 @@ export default function About() {
       {/* Chamada Final */}
       <section
         className={`py-20 px-6 text-center transition-colors duration-500 ${
-          isDark ? "bg-gray-800" : "bg-indigo-50"
+          isDark ? "bg-[#1A1A1A]" : "bg-indigo-50"
         }`}
       >
         <h2
           className={`text-4xl font-extrabold mb-6 ${
-            isDark ? "text-indigo-400" : "text-indigo-600"
+            isDark ? "text-[#00A67E]" : "text-indigo-600"
           }`}
         >
           Junte-se ao Futuro da Aprendizagem!
@@ -265,7 +265,7 @@ export default function About() {
         </p>
         <Link
           to="/contato"
-          className="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-indigo-500/30"
+          className="inline-block bg-[#00A67E] hover:bg-[#33B89A] text-white font-semibold py-3 px-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-[#33B89A]/30"
         >
           Fale Conosco
         </Link>

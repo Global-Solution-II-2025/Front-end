@@ -57,15 +57,15 @@ export default function FAQ() {
   return (
     <div
       className={`min-h-screen flex flex-col items-center px-6 py-16 transition-colors duration-500 ${
-        isDark ? "bg-gray-900 text-gray-200" : "bg-gray-50 text-gray-900"
+        isDark ? "bg-[#1A1A1A] text-gray-200" : "bg-gray-50 text-gray-900"
       }`}
     >
       <h1
         className={`text-4xl font-bold mb-12 transition-colors duration-500 ${
-          isDark ? "text-indigo-400" : "text-indigo-600"
+          isDark ? "text-[#00A67E]" : "text-indigo-600"
         }`}
       >
-        Perguntas Frequentes 💡
+        Perguntas Frequentes
       </h1>
 
       <div className="max-w-3xl w-full space-y-4">
@@ -73,13 +73,13 @@ export default function FAQ() {
           <div
             key={index}
             className={`rounded-2xl shadow-md transition-colors duration-500 ${
-              isDark ? "bg-gray-800" : "bg-white"
+              isDark ? "bg-[#2A2A2A]" : "bg-white"
             }`}
           >
             <button
               onClick={() => toggle(index)}
               className={`w-full flex justify-between items-center p-5 text-left font-medium rounded-2xl transition-colors duration-300 ${
-                isDark ? "hover:bg-gray-700" : "hover:bg-gray-100"
+                isDark ? "hover:bg-[#3A3A3A]" : "hover:bg-gray-100"
               }`}
             >
               {faq.question}

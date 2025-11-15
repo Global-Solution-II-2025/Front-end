@@ -53,7 +53,7 @@ export default function Login() {
     const usuarios = getUsuarios();
     const exists = usuarios.find((u: any) => u.email === form.email);
     if (exists) throw new Error("E-mail já cadastrado.");
-
+v
     const novoUsuario = {
       nome: form.nome,
       email: form.email,
@@ -97,15 +97,15 @@ export default function Login() {
       {/* Lado do formulário */}
       <div
         className={`flex-1 flex flex-col justify-center items-center p-8 sm:p-12 transition-colors duration-500 ${
-          isDark ? "bg-gray-900" : "bg-gradient-to-br from-white to-indigo-50"
+          isDark ? "bg-[#1A1A1A]" : "bg-gradient-to-br from-white to-indigo-50"
         }`}
       >
         <div
           className={`w-full max-w-md rounded-xl p-8 border shadow-xl transition-colors duration-500 ${
-            isDark ? "bg-gray-800 border-gray-700 text-gray-100" : "bg-white border-gray-100 text-gray-800"
+            isDark ? "bg-[#2A2A2A] border-[#2A2A2A] text-gray-100" : "bg-white border-gray-100 text-gray-800"
           }`}
         >
-          <h2 className={`text-2xl font-semibold text-center mb-6 transition-colors duration-500 ${isDark ? "text-indigo-400" : "text-indigo-700"}`}>
+          <h2 className={`text-2xl font-semibold text-center mb-6 transition-colors duration-500 ${isDark ? "text-[#00A67E]" : "text-indigo-700"}`}>
             {isRegister ? "Crie sua conta" : "Bem-vindo(a) de volta"}
           </h2>
 
@@ -116,10 +116,10 @@ export default function Login() {
                   <label className="text-sm font-medium">Nome completo</label>
                   <div
                     className={`flex items-center border rounded-lg px-3 transition-colors duration-500 ${
-                      isDark ? "border-gray-600 bg-gray-700" : "border-gray-300 bg-white"
+                      isDark ? "border-[#2A2A2A] bg-[#1A1A1A]" : "border-gray-300 bg-white"
                     }`}
                   >
-                    <FiUser className="text-gray-400" />
+                    <FiUser className="text-gray-300" />
                     <input
                       type="text"
                       name="nome"
@@ -135,10 +135,10 @@ export default function Login() {
                   <label className="text-sm font-medium">Data de nascimento</label>
                   <div
                     className={`flex items-center border rounded-lg px-3 transition-colors duration-500 ${
-                      isDark ? "border-gray-600 bg-gray-700" : "border-gray-300 bg-white"
+                      isDark ? "border-[#2A2A2A] bg-[#1A1A1A]" : "border-gray-300 bg-white"
                     }`}
                   >
-                    <FiCalendar className="text-gray-400" />
+                    <FiCalendar className="text-gray-300" />
                     <input
                       type="date"
                       name="dataNascimento"
@@ -157,10 +157,10 @@ export default function Login() {
               <label className="text-sm font-medium">E-mail</label>
               <div
                 className={`flex items-center border rounded-lg px-3 transition-colors duration-500 ${
-                  isDark ? "border-gray-600 bg-gray-700" : "border-gray-300 bg-white"
+                  isDark ? "border-[#2A2A2A] bg-[#1A1A1A]" : "border-gray-300 bg-white"
                 }`}
               >
-                <FiMail className="text-gray-400" />
+                <FiMail className="text-gray-300" />
                 <input
                   type="email"
                   name="email"
@@ -177,10 +177,10 @@ export default function Login() {
               <label className="text-sm font-medium">Senha</label>
               <div
                 className={`flex items-center border rounded-lg px-3 transition-colors duration-500 ${
-                  isDark ? "border-gray-600 bg-gray-700" : "border-gray-300 bg-white"
+                  isDark ? "border-[#2A2A2A] bg-[#1A1A1A]" : "border-gray-300 bg-white"
                 }`}
               >
-                <FiLock className="text-gray-400" />
+                <FiLock className="text-gray-300" />
                 <input
                   type={showPassword ? "text" : "password"}
                   name="senha"
@@ -192,7 +192,7 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="text-gray-500 hover:text-indigo-600 transition-colors duration-300"
+                  className="text-gray-500 hover:text-[#00A67E] transition-colors duration-300"
                 >
                   {showPassword ? <FiEyeOff /> : <FiEye />}
                 </button>
@@ -205,10 +205,10 @@ export default function Login() {
                   <label className="text-sm font-medium">Confirmação de senha</label>
                   <div
                     className={`flex items-center border rounded-lg px-3 transition-colors duration-500 ${
-                      isDark ? "border-gray-600 bg-gray-700" : "border-gray-300 bg-white"
+                      isDark ? "border-[#2A2A2A] bg-[#1A1A1A]" : "border-gray-300 bg-white"
                     }`}
                   >
-                    <FiLock className="text-gray-400" />
+                    <FiLock className="text-gray-300" />
                     <input
                       type={showPassword ? "text" : "password"}
                       name="confirmarSenha"
@@ -230,11 +230,11 @@ export default function Login() {
                   />
                   <label>
                     Aceito os{" "}
-                    <a href="/termos" className="text-indigo-600 underline">
+                    <a href="/termos" className="text-[#00A67E] underline">
                       Termos de Uso
                     </a>{" "}
                     e{" "}
-                    <a href="/privacidade" className="text-indigo-600 underline">
+                    <a href="/privacidade" className="text-[#00A67E] underline">
                       Política de Privacidade
                     </a>
                   </label>
@@ -248,7 +248,7 @@ export default function Login() {
               type="submit"
               className={`w-full py-2 rounded-lg font-medium transition-colors duration-300 ${
                 isDark
-                  ? "bg-indigo-500 hover:bg-indigo-600 text-gray-100"
+                  ? "bg-[#00A67E] hover:bg-[#007a5e] text-gray-100"
                   : "bg-indigo-600 hover:bg-indigo-700 text-white"
               }`}
               disabled={loading}
@@ -261,7 +261,7 @@ export default function Login() {
             {isRegister ? "Já tem uma conta?" : "Ainda não tem uma conta?"}{" "}
             <button
               onClick={() => setIsRegister(!isRegister)}
-              className="text-indigo-600 font-medium hover:underline"
+              className="text-[#00A67E] font-medium hover:underline"
             >
               {isRegister ? "Fazer login" : "Cadastrar-se"}
             </button>

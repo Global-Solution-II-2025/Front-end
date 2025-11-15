@@ -38,12 +38,12 @@ export default function Integrantes() {
   return (
     <div
       className={`min-h-screen px-6 py-20 transition-colors duration-500 ${
-        isDark ? "bg-gray-900 text-gray-200" : "bg-gray-50 text-gray-900"
+        isDark ? "bg-[#1A1A1A] text-gray-200" : "bg-gray-50 text-gray-900"
       }`}
     >
       <h1
         className={`text-5xl font-extrabold mb-16 text-center transition-colors duration-500 ${
-          isDark ? "text-indigo-400" : "text-indigo-600"
+          isDark ? "text-gray-200" : "text-indigo-600"
         }`}
       >
         Nossa Equipe 🚀
@@ -51,16 +51,16 @@ export default function Integrantes() {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
         {integrantes.map((member, index) => (
-          <div
+          <div  
             key={index}
             className={`relative group flex flex-col items-center rounded-3xl shadow-2xl p-8 transition-transform duration-500 transform hover:scale-105 hover:-translate-y-3 overflow-hidden ${
               isDark
-                ? "bg-linear-to-tr from-gray-800 to-gray-700 text-gray-200"
+                ? "bg-linear-to-tr from-[#2A2A2A] to-[#1A1A1A] text-gray-200"
                 : "bg-llinear-to-tr from-white to-gray-100 text-gray-900"
             }`}
           >
             {/* Imagem */}
-            <div className="w-44 h-44 rounded-full overflow-hidden border-4 border-indigo-500 shadow-lg mb-6 transition-transform duration-500 hover:scale-105">
+            <div className="w-44 h-44 rounded-full overflow-hidden border-4 border-[#00A67E] shadow-lg mb-6 transition-transform duration-500 hover:scale-105">
               <img
                 src={member.image}
                 alt={member.name}
@@ -78,7 +78,7 @@ export default function Integrantes() {
             </h2>
             <p
               className={`font-medium mb-4 text-center transition-colors duration-500 ${
-                isDark ? "text-indigo-300" : "text-indigo-600"
+                isDark ? "text-[#00A67E]" : "text-indigo-600"
               }`}
             >
               {member.role}
@@ -98,7 +98,7 @@ export default function Integrantes() {
                   href={member.github}
                   target="_blank"
                   rel="noreferrer"
-                  className={`text-xl transition-colors duration-500 hover:text-indigo-500 ${
+                  className={`text-xl transition-colors duration-500 hover:text-[#00A67E] ${
                     isDark ? "text-gray-200" : "text-gray-800"
                   }`}
                 >
@@ -110,7 +110,7 @@ export default function Integrantes() {
                   href={member.linkedin}
                   target="_blank"
                   rel="noreferrer"
-                  className={`text-xl transition-colors duration-500 hover:text-indigo-500 ${
+                  className={`text-xl transition-colors duration-500 hover:text-[#00A67E] ${
                     isDark ? "text-gray-200" : "text-gray-800"
                   }`}
                 >

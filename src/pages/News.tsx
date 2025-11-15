@@ -21,7 +21,7 @@ export default function Noticias() {
     return (
       <div
         className={`flex justify-center items-center min-h-[calc(100vh-160px)] transition-colors duration-500 ${
-          isDark ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"
+          isDark ? "bg-[#1A1A1A] text-gray-100" : "bg-white text-gray-800"
         }`}
       >
         <p className="text-lg font-semibold">Carregando notícias...</p>
@@ -32,7 +32,7 @@ export default function Noticias() {
   return (
     <main
       className={`flex flex-col items-center min-h-[calc(100vh-160px)] px-4 sm:px-6 lg:px-16 py-16 transition-colors duration-500 ${
-        isDark ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"
+        isDark ? "bg-[#1A1A1A] text-gray-100" : "bg-white text-gray-800"
       }`}
     >
       <h1
@@ -52,7 +52,7 @@ export default function Noticias() {
             rel="noopener noreferrer"
             className={`rounded-2xl shadow-md overflow-hidden border transition-all duration-500 transform hover:scale-105 ${
               isDark
-                ? "bg-gray-800 border-gray-700 text-gray-200"
+                ? "bg-[#2A2A2A] border-[#1A1A1A] text-gray-200"
                 : "bg-white border-gray-200 text-gray-800"
             }`}
           >
@@ -66,7 +66,7 @@ export default function Noticias() {
             <div className="p-6">
               <h2
                 className={`font-semibold text-lg mb-2 transition-colors duration-500 ${
-                  isDark ? "text-blue-400" : "text-blue-600"
+                  isDark ? "text-gray-200" : "text-blue-600"
                 }`}
               >
                 {noticia.title}
@@ -80,7 +80,7 @@ export default function Noticias() {
               </p>
               <span
                 className={`text-xs transition-colors duration-500 ${
-                  isDark ? "text-gray-400" : "text-gray-500"
+                  isDark ? "text-[#00A67E]" : "text-gray-500"
                 }`}
               >
                 {new Date(noticia.publishedAt).toLocaleDateString()}

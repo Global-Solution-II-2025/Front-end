@@ -8,16 +8,16 @@ export default function Contact() {
     <section
       className={`min-h-screen py-16 px-6 text-center transition-colors duration-500 ${
         isDark
-          ? "bg-gray-900 text-gray-200"
+          ? "bg-[#1A1A1A] text-gray-200"
           : "bg-linear-to-b from-blue-50 to-white text-gray-900"
       }`}
     >
       <h1
         className={`text-4xl font-bold mb-10 transition-colors duration-500 ${
-          isDark ? "text-blue-400" : "text-blue-600"
+          isDark ? "text-[#00A67E]" : "text-blue-600"
         }`}
       >
-        Entre em Contato 💬
+        Entre em Contato
       </h1>
 
       <p
@@ -32,10 +32,10 @@ export default function Contact() {
         {/* Email */}
         <div
           className={`shadow-xl rounded-2xl p-6 hover:scale-105 transition-transform duration-500 ${
-            isDark ? "bg-gray-800" : "bg-white"
+            isDark ? "bg-[#2A2A2A]" : "bg-white"
           }`}
         >
-          <FiMail className="text-5xl text-blue-500 mx-auto mb-4" />
+          <FiMail className="text-5xl text-[#00A67E] mx-auto mb-4" />
           <h3
             className={`text-xl font-semibold mb-2 transition-colors duration-500 ${
               isDark ? "text-gray-100" : "text-gray-800"
@@ -51,10 +51,10 @@ export default function Contact() {
         {/* Telefone */}
         <div
           className={`shadow-xl rounded-2xl p-6 hover:scale-105 transition-transform duration-500 ${
-            isDark ? "bg-gray-800" : "bg-white"
+            isDark ? "bg-[#2A2A2A]" : "bg-white"
           }`}
         >
-          <FiPhone className="text-5xl text-blue-500 mx-auto mb-4" />
+          <FiPhone className="text-5xl text-[#00A67E] mx-auto mb-4" />
           <h3
             className={`text-xl font-semibold mb-2 transition-colors duration-500 ${
               isDark ? "text-gray-100" : "text-gray-800"
@@ -70,10 +70,10 @@ export default function Contact() {
         {/* Localização */}
         <div
           className={`shadow-xl rounded-2xl p-6 hover:scale-105 transition-transform duration-500 ${
-            isDark ? "bg-gray-800" : "bg-white"
+            isDark ? "bg-[#2A2A2A]" : "bg-white"
           }`}
         >
-          <FiMapPin className="text-5xl text-blue-500 mx-auto mb-4" />
+          <FiMapPin className="text-5xl text-[#00A67E] mx-auto mb-4" />
           <h3
             className={`text-xl font-semibold mb-2 transition-colors duration-500 ${
               isDark ? "text-gray-100" : "text-gray-800"
@@ -94,7 +94,7 @@ export default function Contact() {
           target="_blank"
           rel="noreferrer"
           className={`transition-colors duration-500 ${
-            isDark ? "text-blue-400 hover:text-blue-200" : "text-blue-500 hover:text-blue-700"
+            isDark ? "text-[#00A67E] hover:text-gray-300" : "text-blue-500 hover:text-blue-700"
           }`}
         >
           <FiInstagram size={30} />
@@ -105,7 +105,7 @@ export default function Contact() {
           target="_blank"
           rel="noreferrer"
           className={`transition-colors duration-500 ${
-            isDark ? "text-blue-400 hover:text-blue-200" : "text-blue-500 hover:text-blue-700"
+            isDark ? "text-[#00A67E] hover:text-gray-300" : "text-blue-500 hover:text-blue-700"
           }`}
         >
           <FiLinkedin size={30} />
@@ -116,7 +116,7 @@ export default function Contact() {
           target="_blank"
           rel="noreferrer"
           className={`transition-colors duration-500 ${
-            isDark ? "text-blue-400 hover:text-blue-200" : "text-blue-500 hover:text-blue-700"
+            isDark ? "text-[#00A67E] hover:text-gray-300" : "text-blue-500 hover:text-blue-700"
           }`}
         >
           <FiGithub size={30} />

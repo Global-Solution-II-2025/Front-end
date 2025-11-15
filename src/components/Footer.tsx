@@ -19,7 +19,7 @@ export default function Footer() {
         <div>
           <h2
             className={`text-2xl font-bold mb-2 transition-colors duration-500 ${
-              isDark ? "text-[#00A67E]" : "text-indigo-600"
+              isDark ? "text-gray-100" : "text-indigo-600"
             }`}
           >
             NeuralUp
@@ -51,7 +51,7 @@ export default function Footer() {
                   isDark ? "text-gray-300" : "text-gray-700"
                 }`}
               >
-                Integrantes
+                Membros
               </Link>
             </li>
             <li>
