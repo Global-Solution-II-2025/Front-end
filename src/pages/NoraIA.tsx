@@ -1,215 +1,379 @@
-import React, { useState, useEffect } from "react";
-import { startChat, submitAnswer } from "../api/chat";
+import { useEffect, useState } from "react";
 import Message from "../components/Message";
+import { useTheme } from "../context/useTheme";
+import { Bot, Loader2 } from "lucide-react";
 
+/**
+ * Observações:
+ * - O componente usa fetch() diretamente para chamar a API.
+ * - API base: import.meta.env.VITE_API_URL || ''  -> configure VITE_API_URL no .env do frontend (ex: http://localhost:8000)
+ * - Endpoints usados:
+ *    GET  /questions
+ *    POST /responses   { user_id, responses: [{ area_id, score }, ...] }
+ *    GET  /results/{user_id}
+ */
 
-interface CareerProfile {
-  riasec_code: string;
-  career_name: string;
-  description: string;
+/* ----------------------
+   Tipagens do backend
+   ---------------------- */
+interface BackendQuestion {
+  id: number;
+  text: string;
+  area_id: number | null;
+}
+
+interface ResultArea {
+  area_id: number;
+  area_name: string;
+  total_score?: number;
+  avg_score: number;
 }
 
 interface ChatState {
   session_id: string;
-  current_question_id: number | null;
-  scores: Record<string, number>;
+  questions: BackendQuestion[];
+  currentIndex: number;
+  scores: { area_id: number; score: number }[];
   finished: boolean;
-  suggested_profile: CareerProfile | null;
+  results: {
+    user_id: string;
+    summary: ResultArea[];
+    best_areas: ResultArea[];
+  } | null;
 }
 
-// ======================
-// PERGUNTAS E OPÇÕES LOCAL
-// ======================
-const QUESTIONS = [
-  {
-    id: 1,
-    question: "Você prefere trabalhar ao ar livre ou em um escritório?",
-    options: [
-      { text: "Ao ar livre", riasec: "R" },
-      { text: "Em um escritório", riasec: "C" }
-    ]
-  },
-  {
-    id: 2,
-    question: "Você gosta de consertar e montar coisas?",
-    options: [
-      { text: "Sim, gosto bastante", riasec: "R" },
-      { text: "Não muito", riasec: "A" }
-    ]
-  },
-  {
-    id: 3,
-    question: "Você gosta de estudar matemática e lógica?",
-    options: [
-      { text: "Sim", riasec: "I" },
-      { text: "Prefiro evitar", riasec: "S" }
-    ]
-  },
-  {
-    id: 4,
-    question: "Prefere ajudar pessoas diretamente?",
-    options: [
-      { text: "Sim, gosto muito", riasec: "S" },
-      { text: "Prefiro trabalhar sozinho", riasec: "I" }
-    ]
-  }
-];
+/* ==========================
+   COMPONENTE PRINCIPAL
+   ========================== */
+export default function Chatbot() {
+  const { isDark } = useTheme();
 
-// ======================
-// COMPONENTE CHATBOT
-// ======================
-const Chatbot: React.FC = () => {
+  // API base (configure in frontend .env as VITE_API_URL)
+  const API_BASE = import.meta.env.VITE_API_URL || "https://noraia-sm77.onrender.com";
+
   const [sessionId] = useState(() =>
     Math.random().toString(36).substring(2, 9)
   );
 
   const [chatState, setChatState] = useState<ChatState | null>(null);
-  const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>([]);
+  const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>(
+    []
+  );
   const [loading, setLoading] = useState(false);
 
   const aiName = "Nora";
   const aiAvatar =
     "https://api.dicebear.com/9.x/bottts/svg?seed=Nora&backgroundColor=b6e3f4";
 
-useEffect(() => {
-  initChat();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+  useEffect(() => {
+    initChat();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
+  /* -------------------------
+     Inicializa: busca perguntas
+     ------------------------- */
   const initChat = async () => {
     setLoading(true);
     try {
-      const data = await startChat(sessionId);
-      setChatState(data);
+      const res = await fetch(`${API_BASE}/questions`);
+      if (!res.ok) {
+        throw new Error(`Failed to load questions (${res.status})`);
+      }
+      const questions: BackendQuestion[] = await res.json();
 
-      const firstQuestion = QUESTIONS.find(q => q.id === data.current_question_id);
+      const initialState: ChatState = {
+        session_id: sessionId,
+        questions,
+        currentIndex: 0,
+        scores: [],
+        finished: false,
+        results: null,
+      };
 
+      setChatState(initialState);
+
+      // Mensagens iniciais
       setMessages([
-        { text: "✨ Oi! Eu sou a Nora. Vamos descobrir sua carreira ideal? 💼", isUser: false },
-        { text: firstQuestion?.question ?? "Primeira pergunta não encontrada!", isUser: false }
+        {
+          text: "✨ Oi! Eu sou a Nora. Vamos descobrir sua carreira ideal? 💼",
+          isUser: false,
+        },
+        {
+          text:
+            questions.length > 0
+              ? questions[0].text
+              : "Nenhuma pergunta encontrada no servidor.",
+          isUser: false,
+        },
       ]);
-    } catch (error) {
-      console.error(error);
-      setMessages([{ text: "Erro ao conectar no servidor 😕", isUser: false }]);
+    } catch (err) {
+      console.error("initChat error:", err);
+      setMessages([
+        { text: "Erro ao conectar ao servidor. Tente novamente mais tarde.", isUser: false },
+      ]);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  const handleAnswer = async (optionIndex: number) => {
+  /* -------------------------
+     Ao responder uma pergunta
+     ------------------------- */
+  const handleAnswer = async (scoreValue: number) => {
     if (!chatState) return;
-
-    const question = QUESTIONS.find(q => q.id === chatState.current_question_id);
+    const { questions, currentIndex, scores } = chatState;
+    const question = questions[currentIndex];
     if (!question) return;
 
-    const chosen = question.options[optionIndex];
+    // Mensagem do usuário (nota)
+    setMessages((prev) => [
+      ...prev,
+      { text: `Nota: ${scoreValue}`, isUser: true },
+    ]);
 
-    // Mensagem do usuário
-    setMessages(prev => [...prev, { text: chosen.text, isUser: true }]);
+    // Atualiza estado localmente com a resposta
+    const newScores = [...scores, { area_id: question.area_id ?? 0, score: scoreValue }];
+
+    const isLast = currentIndex + 1 >= questions.length;
+
+    // Avança localmente a pergunta (para UI)
+    const nextIndex = isLast ? currentIndex : currentIndex + 1;
+    setChatState({
+      ...chatState,
+      scores: newScores,
+      currentIndex: nextIndex,
+    });
+
+    // Mostrar próxima pergunta (ou mensagem de finalização)
+    if (!isLast) {
+      const nextQ = questions[nextIndex];
+      setMessages((prev) => [
+        ...prev,
+        { text: nextQ.text, isUser: false },
+      ]);
+      return;
+    }
+
+    // Se terminou: enviar todas as respostas para /responses e buscar /results/{session_id}
     setLoading(true);
-
     try {
-      const data = await submitAnswer({
-        session_id: sessionId,
-        question_id: question.id,
-        option_index: optionIndex
+      // Monta payload conforme API FastAPI esperada
+      const payload = {
+        user_id: sessionId,
+        responses: newScores.map((s) => ({
+          area_id: s.area_id,
+          score: s.score,
+        })),
+      };
+
+      // POST /responses
+      const postRes = await fetch(`${API_BASE}/responses`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
 
-      setChatState(data);
-
-      // Se terminou
-      if (data.finished) {
-        const career = data?.suggested_profile?.career_name ?? "Indefinida";
-
-        setMessages(prev => [
+      if (!postRes.ok) {
+        // tenta ler json com mensagem de erro
+        const errText = await safeReadText(postRes);
+        console.error("POST /responses failed:", postRes.status, errText);
+        setMessages((prev) => [
           ...prev,
-          { text: `🎯 Sua carreira recomendada é: *${career}*`, isUser: false }
+          { text: "Erro ao salvar suas respostas. Tente novamente.", isUser: false },
         ]);
-
         setLoading(false);
         return;
       }
 
-      // Próxima pergunta
-      const nextQuestion = QUESTIONS.find(q => q.id === data.current_question_id);
+      // GET /results/{session_id}
+      const resultsRes = await fetch(`${API_BASE}/results/${encodeURIComponent(sessionId)}`);
+      if (!resultsRes.ok) {
+        const errText = await safeReadText(resultsRes);
+        console.error("GET /results failed:", resultsRes.status, errText);
+        setMessages((prev) => [
+          ...prev,
+          { text: "Erro ao recuperar resultados. Tente novamente.", isUser: false },
+        ]);
+        setLoading(false);
+        return;
+      }
 
-      setMessages(prev => [
+      const resultsData = await resultsRes.json();
+
+      // Atualiza estado final com resultados
+      setChatState((prev) =>
+        prev
+          ? { ...prev, finished: true, results: resultsData }
+          : prev
+      );
+
+      // Exibe mensagem final com melhor área(s)
+      const best = resultsData?.best_areas ?? [];
+      if (best.length === 0) {
+        setMessages((prev) => [
+          ...prev,
+          { text: "Teste finalizado. Não foi possível determinar uma área.", isUser: false },
+        ]);
+      } else {
+        // junta nomes das melhores áreas (pode ter empate)
+        const names = best.map((b: ResultArea) => b.area_name).join(", ");
+        setMessages((prev) => [
+          ...prev,
+          { text: `🎯 Sua(s) melhor(es) área(s): ${names}`, isUser: false },
+        ]);
+      }
+    } catch (err) {
+      console.error("finalize error:", err);
+      setMessages((prev) => [
         ...prev,
-        { text: nextQuestion?.question ?? "Pergunta não encontrada!", isUser: false }
+        { text: "Erro no processo final. Tente novamente.", isUser: false },
       ]);
-    } catch (error) {
-      console.error(error);
-      setMessages(prev => [...prev, { text: "Erro ao enviar resposta.", isUser: false }]);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
-  const currentQuestion = chatState
-    ? QUESTIONS.find(q => q.id === chatState.current_question_id)
-    : null;
+  // helper para ler resposta de erro
+  const safeReadText = async (res: Response) => {
+    try {
+      return await res.text();
+    } catch {
+      return "";
+    }
+  };
 
+  const currentQuestion =
+    chatState && chatState.questions.length > 0
+      ? chatState.questions[chatState.currentIndex]
+      : null;
+
+  /* ======================
+     RENDER
+     ====================== */
   return (
-    <div className="flex flex-col h-full bg-linear-to-b from-blue-50 to-white rounded-2xl shadow-xl max-w-md mx-auto border border-gray-100">
-      
-      {/* Cabeçalho */}
-      <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm border-b border-gray-100 rounded-t-2xl">
-        <img src={aiAvatar} alt={aiName} className="w-12 h-12 rounded-full border" />
-        <div>
-          <h2 className="text-lg font-semibold text-gray-800">{aiName}</h2>
-          <p className="text-xs text-green-500">Online agora</p>
-        </div>
-      </div>
-
-      {/* Mensagens */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3 scroll-smooth">
-        {messages.map((msg, index) => (
-          <Message
-            key={index}
-            text={msg.text}
-            isUser={msg.isUser}
-            name={!msg.isUser ? aiName : undefined}
-            avatar={!msg.isUser ? aiAvatar : undefined}
+    <main
+      className={`min-h-[calc(100vh-160px)] flex justify-center items-center px-4 py-10 transition-colors duration-500 ${
+        isDark ? "bg-[#1A1A1A]" : "bg-white"
+      }`}
+    >
+      <div
+        className={`w-full max-w-2xl rounded-2xl shadow-lg border transition-colors duration-500 backdrop-blur-sm ${
+          isDark ? "bg-[#2A2A2A] border-[#333]" : "bg-white/90 border-gray-200"
+        }`}
+      >
+        {/* Header */}
+        <div
+          className={`flex items-center gap-3 px-6 py-4 border-b transition-colors duration-500 ${
+            isDark ? "border-[#333]" : "border-gray-200"
+          }`}
+        >
+          <img
+            src={aiAvatar}
+            className="w-12 h-12 rounded-full border"
+            alt={aiName}
           />
-        ))}
 
-        {loading && (
-          <div className="text-center text-gray-400 text-sm animate-pulse">
-            Nora está pensando...
+          <div>
+            <h2
+              className={`text-lg font-semibold transition-colors duration-500 ${
+                isDark ? "text-gray-100" : "text-gray-800"
+              }`}
+            >
+              {aiName}
+            </h2>
+            <p className="text-green-500 text-xs">Online agora</p>
+          </div>
+
+          <div className="ml-auto text-blue-600 dark:text-[#00A67E]">
+            <Bot className="w-6 h-6" />
+          </div>
+        </div>
+
+        {/* Messages */}
+        <div className="h-[500px] overflow-y-auto px-6 py-4 space-y-3 scroll-smooth">
+          {messages.map((msg, i) => (
+            <Message
+              key={i}
+              text={msg.text}
+              isUser={msg.isUser}
+              name={!msg.isUser ? aiName : undefined}
+              avatar={!msg.isUser ? aiAvatar : undefined}
+            />
+          ))}
+
+          {loading && (
+            <div className="flex justify-center pt-2">
+              <Loader2 className="animate-spin w-6 h-6 text-gray-400" />
+            </div>
+          )}
+        </div>
+
+        {/* Options (1..5) */}
+        {!chatState?.finished && currentQuestion && (
+          <div
+            className={`px-6 py-4 border-t transition-colors duration-500 ${
+              isDark ? "border-[#333]" : "border-gray-200"
+            }`}
+          >
+            <div className="flex flex-col gap-3">
+              {/* Texto da pergunta (redundante com a mensagem, mas mantido para acessibilidade) */}
+              <div className="text-sm text-gray-500 mb-2">{currentQuestion.text}</div>
+
+              <div className="flex gap-2">
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <button
+                    key={n}
+                    disabled={loading}
+                    onClick={() => handleAnswer(n)}
+                    className={`flex-1 py-3 rounded-full font-medium transition-all duration-300 ${
+                      isDark
+                        ? "bg-[#00A67E] text-white hover:bg-[#007a5e]"
+                        : "bg-blue-600 text-white hover:bg-blue-700"
+                    }`}
+                  >
+                    {n}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Finalizado */}
+        {chatState?.finished && (
+          <div
+            className={`px-6 py-4 border-t transition-colors duration-500 ${
+              isDark ? "border-[#333]" : "border-gray-200"
+            }`}
+          >
+            <div className="mb-3">
+              {chatState.results?.best_areas?.length ? (
+                <>
+                  <div className="text-sm text-gray-600 mb-2">Resultado:</div>
+                  <div className="font-semibold">
+                    {chatState.results.best_areas.map((b) => b.area_name).join(", ")}
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    Média: {chatState.results.best_areas[0].avg_score}
+                  </div>
+                </>
+              ) : (
+                <div className="text-sm text-gray-600">Sem resultado definido.</div>
+              )}
+            </div>
+
+            <button
+              onClick={() => window.location.reload()}
+              className={`w-full py-3 rounded-full text-white font-medium transition-all duration-300 ${
+                isDark ? "bg-[#00A67E] hover:bg-[#007a5e]" : "bg-green-600 hover:bg-green-700"
+              }`}
+            >
+              🔄 Fazer outro teste
+            </button>
           </div>
         )}
       </div>
-
-      {/* Opções */}
-      {currentQuestion && !chatState?.finished && (
-        <div className="p-4 bg-white border-t border-gray-100 rounded-b-2xl">
-          <div className="grid grid-cols-1 gap-2">
-            {currentQuestion.options.map((opt, i) => (
-              <button
-                key={i}
-                onClick={() => handleAnswer(i)}
-                className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition duration-200 disabled:opacity-50"
-                disabled={loading}
-              >
-                {opt.text}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Finalizado */}
-      {chatState?.finished && (
-        <div className="p-4 bg-white border-t border-gray-100 rounded-b-2xl">
-          <button
-            onClick={() => window.location.reload()}
-            className="w-full bg-green-500 text-white py-2 px-4 rounded-full hover:bg-green-600 transition duration-200"
-          >
-            🔄 Fazer outro teste
-          </button>
-        </div>
-      )}
-    </div>
+    </main>
   );
-};
-
-export default Chatbot;
+}
