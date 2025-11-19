@@ -3,19 +3,6 @@ import Message from "../components/Message";
 import { useTheme } from "../context/useTheme";
 import { Bot, Loader2 } from "lucide-react";
 
-/**
- * Observações:
- * - O componente usa fetch() diretamente para chamar a API.
- * - API base: import.meta.env.VITE_API_URL || ''  -> configure VITE_API_URL no .env do frontend (ex: http://localhost:8000)
- * - Endpoints usados:
- *    GET  /questions
- *    POST /responses   { user_id, responses: [{ area_id, score }, ...] }
- *    GET  /results/{user_id}
- */
-
-/* ----------------------
-   Tipagens do backend
-   ---------------------- */
 interface BackendQuestion {
   id: number;
   text: string;
@@ -42,13 +29,9 @@ interface ChatState {
   } | null;
 }
 
-/* ==========================
-   COMPONENTE PRINCIPAL
-   ========================== */
 export default function Chatbot() {
   const { isDark } = useTheme();
 
-  // API base (configure in frontend .env as VITE_API_URL)
   const API_BASE = import.meta.env.VITE_API_URL || "https://noraia-sm77.onrender.com";
 
   const [sessionId] = useState(() =>
@@ -67,12 +50,9 @@ export default function Chatbot() {
 
   useEffect(() => {
     initChat();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
   }, []);
 
-  /* -------------------------
-     Inicializa: busca perguntas
-     ------------------------- */
   const initChat = async () => {
     setLoading(true);
     try {
@@ -93,7 +73,6 @@ export default function Chatbot() {
 
       setChatState(initialState);
 
-      // Mensagens iniciais
       setMessages([
         {
           text: "✨ Oi! Eu sou a Nora. Vamos descobrir sua carreira ideal? 💼",
@@ -117,27 +96,21 @@ export default function Chatbot() {
     }
   };
 
-  /* -------------------------
-     Ao responder uma pergunta
-     ------------------------- */
   const handleAnswer = async (scoreValue: number) => {
     if (!chatState) return;
     const { questions, currentIndex, scores } = chatState;
     const question = questions[currentIndex];
     if (!question) return;
 
-    // Mensagem do usuário (nota)
     setMessages((prev) => [
       ...prev,
       { text: `Nota: ${scoreValue}`, isUser: true },
     ]);
 
-    // Atualiza estado localmente com a resposta
     const newScores = [...scores, { area_id: question.area_id ?? 0, score: scoreValue }];
 
     const isLast = currentIndex + 1 >= questions.length;
 
-    // Avança localmente a pergunta (para UI)
     const nextIndex = isLast ? currentIndex : currentIndex + 1;
     setChatState({
       ...chatState,
@@ -145,7 +118,6 @@ export default function Chatbot() {
       currentIndex: nextIndex,
     });
 
-    // Mostrar próxima pergunta (ou mensagem de finalização)
     if (!isLast) {
       const nextQ = questions[nextIndex];
       setMessages((prev) => [
@@ -155,10 +127,8 @@ export default function Chatbot() {
       return;
     }
 
-    // Se terminou: enviar todas as respostas para /responses e buscar /results/{session_id}
     setLoading(true);
     try {
-      // Monta payload conforme API FastAPI esperada
       const payload = {
         user_id: sessionId,
         responses: newScores.map((s) => ({
@@ -167,7 +137,6 @@ export default function Chatbot() {
         })),
       };
 
-      // POST /responses
       const postRes = await fetch(`${API_BASE}/responses`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -175,7 +144,6 @@ export default function Chatbot() {
       });
 
       if (!postRes.ok) {
-        // tenta ler json com mensagem de erro
         const errText = await safeReadText(postRes);
         console.error("POST /responses failed:", postRes.status, errText);
         setMessages((prev) => [
@@ -186,7 +154,6 @@ export default function Chatbot() {
         return;
       }
 
-      // GET /results/{session_id}
       const resultsRes = await fetch(`${API_BASE}/results/${encodeURIComponent(sessionId)}`);
       if (!resultsRes.ok) {
         const errText = await safeReadText(resultsRes);
@@ -201,14 +168,12 @@ export default function Chatbot() {
 
       const resultsData = await resultsRes.json();
 
-      // Atualiza estado final com resultados
       setChatState((prev) =>
         prev
           ? { ...prev, finished: true, results: resultsData }
           : prev
       );
 
-      // Exibe mensagem final com melhor área(s)
       const best = resultsData?.best_areas ?? [];
       if (best.length === 0) {
         setMessages((prev) => [
@@ -216,7 +181,6 @@ export default function Chatbot() {
           { text: "Teste finalizado. Não foi possível determinar uma área.", isUser: false },
         ]);
       } else {
-        // junta nomes das melhores áreas (pode ter empate)
         const names = best.map((b: ResultArea) => b.area_name).join(", ");
         setMessages((prev) => [
           ...prev,
@@ -234,7 +198,6 @@ export default function Chatbot() {
     }
   };
 
-  // helper para ler resposta de erro
   const safeReadText = async (res: Response) => {
     try {
       return await res.text();
@@ -248,9 +211,6 @@ export default function Chatbot() {
       ? chatState.questions[chatState.currentIndex]
       : null;
 
-  /* ======================
-     RENDER
-     ====================== */
   return (
     <main
       className={`min-h-[calc(100vh-160px)] flex justify-center items-center px-4 py-10 transition-colors duration-500 ${
@@ -317,7 +277,6 @@ export default function Chatbot() {
             }`}
           >
             <div className="flex flex-col gap-3">
-              {/* Texto da pergunta (redundante com a mensagem, mas mantido para acessibilidade) */}
               <div className="text-sm text-gray-500 mb-2">{currentQuestion.text}</div>
 
               <div className="flex gap-2">
