@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Message from "../components/Message";
 import { useTheme } from "../context/useTheme";
 import { Bot, Loader2 } from "lucide-react";
@@ -46,9 +46,20 @@ export default function Chatbot() {
   const aiName = "Nora";
   const aiAvatar = NoraAvatar;
 
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+
   useEffect(() => {
     initChat();
   }, []);
+
+
 
   const initChat = async () => {
     setLoading(true);
@@ -253,7 +264,10 @@ export default function Chatbot() {
         </div>
 
         {/* Messages */}
-        <div className="h-[500px] overflow-y-auto px-6 py-4 space-y-3 scroll-smooth">
+        <div
+          ref={messagesEndRef}
+          className="h-[500px] overflow-y-auto px-6 py-4 space-y-3 scroll-smooth"
+        >
           {messages.map((msg, i) => (
             <Message
               key={i}
@@ -270,7 +284,7 @@ export default function Chatbot() {
               <span className={`text-sm transition-colors duration-500 ${
                 isDark ? "text-gray-300" : "text-gray-600"
               }`}>
-                ⏳ O questionário pode demorar alguns segundos para carregar, mas vai aparecer em breve!
+                Aguarde enquanto preparamos isso para você...
               </span>
             </div>
           )}
