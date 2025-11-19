@@ -11,7 +11,7 @@ const integrantes: Integrante[] = [
     role: "Desenvolvedor Frontend",
     description:
       "Apaixonado por tecnologia e UX, focado em criar interfaces limpas e interativas.",
-    image: "#",
+    image: Brito,
     github: "https://github.com/thubrito",
     linkedin: "https://www.linkedin.com/in/arthur-brito-da-silva-06658b276/",
   },
@@ -67,10 +67,12 @@ export default function Integrantes() {
                 src={member.image}
                 alt={member.name}
                 className={`w-full h-full object-cover ${
-                  member.name === "Pedro Henrique Brum"
+                      member.name === "Pedro Henrique Brum"
                     ? "scale-125 -translate-y-4"
                     : member.name === "Luiz Felipe Flosi"
                     ? "scale-120"
+                    : member.name === "Arthur Brito"
+                    ? "scale-120 object-top" 
                     : ""
                 }`}
               />
