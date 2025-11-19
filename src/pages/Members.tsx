@@ -20,7 +20,7 @@ const integrantes: Integrante[] = [
     role: "Desenvolvedor Backend",
     description:
       "Especialista em sistemas e implementação de API, garantindo que tudo funcione de forma escalável.",
-    image: "#",
+    image: Flosi,
     github: "https://github.com/felipeflosii",
     linkedin: "https://www.linkedin.com/in/felipeflosii/",
   },
@@ -69,6 +69,8 @@ export default function Integrantes() {
                 className={`w-full h-full object-cover ${
                   member.name === "Pedro Henrique Brum"
                     ? "scale-125 -translate-y-4"
+                    : member.name === "Luiz Felipe Flosi"
+                    ? "scale-120"
                     : ""
                 }`}
               />
