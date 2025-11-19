@@ -1,6 +1,9 @@
 import { useTheme } from "../context/useTheme";
 import type { Integrante } from "../types/integrantes";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
+import Brum from "../assets/brum.jpeg";
+import Brito from "../assets/brito.jpg";
+import Flosi from "../assets/flosi.jpg";
 
 const integrantes: Integrante[] = [
   {
@@ -8,7 +11,7 @@ const integrantes: Integrante[] = [
     role: "Desenvolvedor Frontend",
     description:
       "Apaixonado por tecnologia e UX, focado em criar interfaces limpas e interativas.",
-    image: "#",
+    image: Brito,
     github: "https://github.com/thubrito",
     linkedin: "https://www.linkedin.com/in/arthur-brito-da-silva-06658b276/",
   },
@@ -17,16 +20,15 @@ const integrantes: Integrante[] = [
     role: "Desenvolvedor Backend",
     description:
       "Especialista em sistemas e implementação de API, garantindo que tudo funcione de forma escalável.",
-    image: "#",
+    image: Flosi,
     github: "https://github.com/felipeflosii",
     linkedin: "https://www.linkedin.com/in/felipeflosii/",
   },
   {
     name: "Pedro Henrique Brum",
     role: "Desenvolvedor Backend",
-    description:
-      "Especialista em desenvolvimento API e fanático por Java.",
-    image: "#",
+    description: "Especialista em desenvolvimento API e fanático por Java.",
+    image: Brum,
     github: "https://github.com/PedroBrum-DEV",
     linkedin: "https://www.linkedin.com/in/pedro-brum-66a31b326/",
   },
@@ -51,7 +53,7 @@ export default function Integrantes() {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
         {integrantes.map((member, index) => (
-          <div  
+          <div
             key={index}
             className={`relative group flex flex-col items-center rounded-3xl shadow-2xl p-8 transition-transform duration-500 transform hover:scale-105 hover:-translate-y-3 overflow-hidden ${
               isDark
@@ -64,7 +66,15 @@ export default function Integrantes() {
               <img
                 src={member.image}
                 alt={member.name}
-                className="w-full h-full object-cover"
+                className={`w-full h-full object-cover ${
+                      member.name === "Pedro Henrique Brum"
+                    ? "scale-125 -translate-y-4"
+                    : member.name === "Luiz Felipe Flosi"
+                    ? "scale-120"
+                    : member.name === "Arthur Brito"
+                    ? "scale-120 object-top" 
+                    : ""
+                }`}
               />
             </div>
 
@@ -91,7 +101,7 @@ export default function Integrantes() {
               {member.description}
             </p>
 
-            {/* Links GitHub / LinkedIn */}
+            {/* Links */}
             <div className="flex gap-6 mt-4">
               {member.github && (
                 <a
@@ -105,6 +115,7 @@ export default function Integrantes() {
                   <FaGithub />
                 </a>
               )}
+
               {member.linkedin && (
                 <a
                   href={member.linkedin}
@@ -119,7 +130,7 @@ export default function Integrantes() {
               )}
             </div>
 
-            {/* Overlay sutil */}
+            {/* Overlay */}
             <div className="absolute inset-0 rounded-3xl bg-indigo-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"></div>
           </div>
         ))}
