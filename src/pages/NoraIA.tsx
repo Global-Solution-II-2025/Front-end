@@ -39,9 +39,7 @@ export default function Chatbot() {
   );
 
   const [chatState, setChatState] = useState<ChatState | null>(null);
-  const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>(
-    []
-  );
+  const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>([]);
   const [loading, setLoading] = useState(false);
 
   const aiName = "Nora";
@@ -50,7 +48,6 @@ export default function Chatbot() {
 
   useEffect(() => {
     initChat();
-
   }, []);
 
   const initChat = async () => {
@@ -263,8 +260,13 @@ export default function Chatbot() {
           ))}
 
           {loading && (
-            <div className="flex justify-center pt-2">
+            <div className="flex flex-col items-center pt-2 gap-1">
               <Loader2 className="animate-spin w-6 h-6 text-gray-400" />
+              <span className={`text-sm transition-colors duration-500 ${
+                isDark ? "text-gray-300" : "text-gray-600"
+              }`}>
+                ⏳ O questionário pode demorar alguns segundos para carregar, mas vai aparecer em breve!
+              </span>
             </div>
           )}
         </div>
