@@ -14,39 +14,168 @@ export default function Dashboard() {
   const { isDark } = useTheme();
 
   const cursos = [
-    {
-      nome: "Python Completo — Do Zero ao Avançado",
-      progresso: 68,
-      horas: 60,
-      categoria: "Programação",
-      nivel: "Intermediário",
-      status: "Em andamento",
-    },
-    {
-      nome: "Estruturas de Dados e Algoritmos",
-      progresso: 25,
-      horas: 40,
-      categoria: "Back-end",
-      nivel: "Avançado",
-      status: "Iniciado",
-    },
-    {
-      nome: "JavaScript Moderno + Projetos",
-      progresso: 82,
-      horas: 45,
-      categoria: "Front-end",
-      nivel: "Intermediário",
-      status: "Quase concluído",
-    },
-    {
-      nome: "Clean Code — Boas Práticas",
-      progresso: 12,
-      horas: 20,
-      categoria: "Carreira Dev",
-      nivel: "Avançado",
-      status: "Iniciado",
-    },
-  ];
+  {
+    nome: "Python Completo — Do Zero ao Avançado",
+    progresso: 68,
+    horas: 60,
+    categoria: "Programação",
+    nivel: "Intermediário",
+    status: "Em andamento",
+  },
+  {
+    nome: "Estruturas de Dados e Algoritmos",
+    progresso: 25,
+    horas: 40,
+    categoria: "Back-end",
+    nivel: "Avançado",
+    status: "Iniciado",
+  },
+  {
+    nome: "JavaScript Moderno + Projetos",
+    progresso: 82,
+    horas: 45,
+    categoria: "Front-end",
+    nivel: "Intermediário",
+    status: "Quase concluído",
+  },
+  {
+    nome: "Clean Code — Boas Práticas",
+    progresso: 12,
+    horas: 20,
+    categoria: "Carreira Dev",
+    nivel: "Avançado",
+    status: "Iniciado",
+  },
+  {
+    nome: "Marketing Digital para Iniciantes",
+    progresso: 50,
+    horas: 30,
+    categoria: "Marketing",
+    nivel: "Iniciante",
+    status: "Em andamento",
+  },
+  {
+    nome: "Finanças Pessoais e Investimentos",
+    progresso: 30,
+    horas: 25,
+    categoria: "Negócios",
+    nivel: "Intermediário",
+    status: "Em andamento",
+  },
+  {
+    nome: "Excel Avançado — Planilhas e Dashboards",
+    progresso: 70,
+    horas: 35,
+    categoria: "Produtividade",
+    nivel: "Avançado",
+    status: "Em andamento",
+  },
+  {
+    nome: "Inglês Avançado — Conversação",
+    progresso: 40,
+    horas: 50,
+    categoria: "Idiomas",
+    nivel: "Avançado",
+    status: "Em andamento",
+  },
+  {
+    nome: "Espanhol Básico para Viagens",
+    progresso: 90,
+    horas: 15,
+    categoria: "Idiomas",
+    nivel: "Iniciante",
+    status: "Quase concluído",
+  },
+  {
+    nome: "Fotografia Digital — Técnicas e Edição",
+    progresso: 20,
+    horas: 40,
+    categoria: "Arte",
+    nivel: "Iniciante",
+    status: "Iniciado",
+  },
+  {
+    nome: "Design Gráfico com Canva",
+    progresso: 55,
+    horas: 20,
+    categoria: "Arte",
+    nivel: "Iniciante",
+    status: "Em andamento",
+  },
+  {
+    nome: "Mindfulness e Meditação",
+    progresso: 60,
+    horas: 10,
+    categoria: "Saúde e Bem-estar",
+    nivel: "Iniciante",
+    status: "Em andamento",
+  },
+  {
+    nome: "Yoga para Iniciantes",
+    progresso: 80,
+    horas: 15,
+    categoria: "Saúde e Bem-estar",
+    nivel: "Iniciante",
+    status: "Quase concluído",
+  },
+  {
+    nome: "Gestão de Projetos com Scrum",
+    progresso: 35,
+    horas: 30,
+    categoria: "Negócios",
+    nivel: "Intermediário",
+    status: "Em andamento",
+  },
+  {
+    nome: "Desenvolvimento de Apps com Flutter",
+    progresso: 10,
+    horas: 50,
+    categoria: "Programação",
+    nivel: "Intermediário",
+    status: "Iniciado",
+  },
+  {
+    nome: "Inteligência Artificial e Machine Learning",
+    progresso: 5,
+    horas: 60,
+    categoria: "Tecnologia",
+    nivel: "Avançado",
+    status: "Iniciado",
+  },
+  {
+    nome: "História da Arte Moderna",
+    progresso: 45,
+    horas: 25,
+    categoria: "Arte",
+    nivel: "Intermediário",
+    status: "Em andamento",
+  },
+  {
+    nome: "Comunicação e Oratória",
+    progresso: 75,
+    horas: 20,
+    categoria: "Desenvolvimento Pessoal",
+    nivel: "Intermediário",
+    status: "Em andamento",
+  },
+  {
+    nome: "Nutrição e Alimentação Saudável",
+    progresso: 50,
+    horas: 15,
+    categoria: "Saúde e Bem-estar",
+    nivel: "Iniciante",
+    status: "Em andamento",
+  },
+  {
+    nome: "Criação de Conteúdo para Redes Sociais",
+    progresso: 60,
+    horas: 20,
+    categoria: "Marketing",
+    nivel: "Intermediário",
+    status: "Em andamento",
+  },
+];
+
 
   return (
     <main
@@ -72,9 +201,9 @@ export default function Dashboard() {
           <h3 className="font-semibold flex items-center gap-2 mb-2">
             <TrendingUp className="w-5 h-5 text-blue-600 dark:text-[#00A67E]" /> Média de progresso
           </h3>
-          <p className="text-3xl font-bold">{
-            Math.round(cursos.reduce((acc, c) => acc + c.progresso, 0) / cursos.length)
-          }%</p>
+          <p className="text-3xl font-bold">
+            {Math.round(cursos.reduce((acc, c) => acc + c.progresso, 0) / cursos.length)}%
+          </p>
         </div>
 
         <div className={`rounded-2xl shadow-md p-6 ${isDark ? "bg-[#2A2A2A]" : "bg-gray-50"}`}>
@@ -129,6 +258,17 @@ export default function Dashboard() {
                 <p className="flex items-center gap-2"><Star className="w-4 h-4" /> Nível {curso.nivel}</p>
                 <p className="flex items-center gap-2"><CheckCircle className="w-4 h-4" /> {curso.status}</p>
               </div>
+
+              {/* Botão de continuar curso */}
+              <button
+                className={`mt-4 px-9 py-2 rounded-lg font-semibold text-sm transition-colors ${
+                  isDark
+                    ? "bg-[#00A67E] hover:bg-[#00c28f] text-white"
+                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                }`}
+              >
+                Continuar curso
+              </button>
             </div>
           ))}
         </div>
