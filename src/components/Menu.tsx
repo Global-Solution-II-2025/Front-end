@@ -3,7 +3,6 @@ import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { useTheme } from "../context/useTheme";
 
-
 export default function Menu() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
@@ -13,6 +12,7 @@ export default function Menu() {
     { to: "/", label: "Início" },
     { to: "/chatbot", label: "Nora IA" },
     { to: "/cursos", label: "Notícias" },
+    { to: "/dashboard", label: "Dashboard" }, // <- NOVO LINK ADICIONADO
   ];
 
   return (
