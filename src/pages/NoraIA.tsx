@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Message from "../components/Message";
 import { useTheme } from "../context/useTheme";
 import { Bot, Loader2 } from "lucide-react";
+import NoraAvatar from "../assets/noraia.png";
 
 interface BackendQuestion {
   id: number;
@@ -43,8 +44,7 @@ export default function Chatbot() {
   const [loading, setLoading] = useState(false);
 
   const aiName = "Nora";
-  const aiAvatar =
-    "https://api.dicebear.com/9.x/bottts/svg?seed=Nora&backgroundColor=b6e3f4";
+  const aiAvatar = NoraAvatar;
 
   useEffect(() => {
     initChat();
@@ -72,7 +72,12 @@ export default function Chatbot() {
 
       setMessages([
         {
-          text: "✨ Oi! Eu sou a Nora. Vamos descobrir sua carreira ideal? 💼",
+          text: "✨ Oii! Eu sou a Nora. Vou te explicar direitinho como funciona o teste antes de começarmos. 😊",
+          isUser: false,
+        },
+        {
+          text:
+            "🌟 Oi! Que tal descobrirmos juntos um pouco mais sobre você? Vou te fazer algumas perguntinhas sobre seus interesses e habilidades. Para cada uma, escolha uma nota de 1 a 5: 1️⃣ = Discordo totalmente e 5️⃣ = Concordo totalmente. ✨ Não se preocupe, não existe resposta certa ou errada — é só para conhecermos melhor seus talentos e gostos. Bora começar? 🚀",
           isUser: false,
         },
         {
@@ -101,7 +106,7 @@ export default function Chatbot() {
 
     setMessages((prev) => [
       ...prev,
-      { text: `Nota: ${scoreValue}`, isUser: true },
+      { text: `Escolho ${scoreValue}`, isUser: true },
     ]);
 
     const newScores = [...scores, { area_id: question.area_id ?? 0, score: scoreValue }];
@@ -181,7 +186,7 @@ export default function Chatbot() {
         const names = best.map((b: ResultArea) => b.area_name).join(", ");
         setMessages((prev) => [
           ...prev,
-          { text: `🎯 Sua(s) melhor(es) área(s): ${names}`, isUser: false },
+          { text: `🎯 Sua melhor área é: ${names}`, isUser: false },
         ]);
       }
     } catch (err) {
@@ -330,7 +335,7 @@ export default function Chatbot() {
                 isDark ? "bg-[#00A67E] hover:bg-[#007a5e]" : "bg-green-600 hover:bg-green-700"
               }`}
             >
-              🔄 Fazer outro teste
+              Refazer teste
             </button>
           </div>
         )}
