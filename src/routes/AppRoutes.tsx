@@ -10,6 +10,7 @@ import FAQ from "../pages/faq";
 import Integrantes from "../pages/Members";
 import Contact from "../pages/Contact";
 import Chatbot from "../pages/NoraIA";
+import Dashboard from "../pages/Dashboard";
 
 export default function AppRoutes() {
   const isLoggedIn = localStorage.getItem("token");
@@ -33,6 +34,7 @@ export default function AppRoutes() {
         <Route path="faq" element={<FAQ />} />
         <Route path="integrantes" element={<Integrantes />} />
         <Route path="contato" element={<Contact />} />
+        <Route path="dashboard" element={<Dashboard />} />
       </Route>
 
       {/* Redireciona tudo que não existe */}

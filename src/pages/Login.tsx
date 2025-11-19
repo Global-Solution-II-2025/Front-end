@@ -96,7 +96,7 @@ export default function Login() {
       {/* Lado do formulário */}
       <div
         className={`flex-1 flex flex-col justify-center items-center p-8 sm:p-12 transition-colors duration-500 ${
-          isDark ? "bg-[#1A1A1A]" : "bg-gradient-to-br from-white to-indigo-50"
+          isDark ? "bg-[#1A1A1A]" : "bg-linear-to-br from-white to-indigo-50"
         }`}
       >
         <div
