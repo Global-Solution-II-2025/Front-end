@@ -2,6 +2,8 @@ import { useTheme } from "../context/useTheme";
 import type { Integrante } from "../types/integrantes";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import Brum from "../assets/brum.jpeg";
+import Brito from "../assets/brito.jpg";
+import Flosi from "../assets/flosi.jpg";
 
 const integrantes: Integrante[] = [
   {
