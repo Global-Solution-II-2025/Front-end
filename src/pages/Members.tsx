@@ -1,9 +1,9 @@
 import { useTheme } from "../context/useTheme";
 import type { Integrante } from "../types/integrantes";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import Brum from "../assets/brum.jpeg";
-import Brito from "../assets/brito.jpg";
-import Flosi from "../assets/flosi.jpg";
+import Brum from "../assets/img/brum.jpeg";
+import Brito from "../assets/img/brito.jpg";
+import Flosi from "../assets/img/flosi.jpg";
 
 const integrantes: Integrante[] = [
   {
@@ -30,7 +30,7 @@ const integrantes: Integrante[] = [
     description: "Especialista em desenvolvimento API e fanático por Java.",
     image: Brum,
     github: "https://github.com/PedroBrum-DEV",
-    linkedin: "https://www.linkedin.com/in/pedro-brum-66a31b326/",
+    linkedin: "https://www.linkedin.com/in/pedro-brum-66a31b326/"
   },
 ];
 

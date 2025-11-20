@@ -1,7 +1,7 @@
 import { FaFacebookF, FaInstagram, FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { FiMail } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useTheme } from "../context/useTheme";
+import { useTheme } from "../../context/useTheme";
 
 export default function Footer() {
   const { isDark } = useTheme();

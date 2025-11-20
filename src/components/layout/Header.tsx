@@ -11,8 +11,8 @@ import {
 } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import Menu from "./Menu";
-import logo from "../assets/favicon.png";
-import { useTheme } from "../context/useTheme";
+import logo from "/favicon.png";
+import { useTheme } from "../../context/useTheme";
 
 export default function Header() {
   const navigate = useNavigate();

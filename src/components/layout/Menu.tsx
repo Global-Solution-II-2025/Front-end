@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import { useTheme } from "../context/useTheme";
+import { useTheme } from "../../context/useTheme";
 
 export default function Menu() {
   const location = useLocation();

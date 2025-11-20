@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchNoticias } from "../api/gnews.ts";
+import { fetchNoticias } from "../api/newsApi.ts";
 import type { Noticia } from "../types/gnews";
 import { useTheme } from "../context/useTheme.ts";
 

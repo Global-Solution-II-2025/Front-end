@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from "react";
-import Message from "../components/Message";
+import Message from "../components/ui/Message";
 import { useTheme } from "../context/useTheme";
 import { Bot, Loader2 } from "lucide-react";
-import NoraAvatar from "../assets/noraia.png";
+import NoraAvatar from "../assets/img/noraia.png";
 
 interface BackendQuestion {
   id: number;
