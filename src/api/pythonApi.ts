@@ -1,4 +1,4 @@
-// src/api/chat.ts
+// src/api/pythonApi.ts
 
 import axios from "axios";
 
