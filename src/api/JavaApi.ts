@@ -1,11 +1,8 @@
-// src/api/javaApi.ts
-
 export interface Usuario {
-  nome: string;
+  nomeCompleto: string;
   email: string;
   senha?: string;
   dataNascimento: string;
-  aceitarTermos?: boolean;
 }
 
 export interface LoginPayload {
@@ -15,21 +12,54 @@ export interface LoginPayload {
 
 export interface LoginResponse {
   token: string;
-  nome: string;
+  nomeCompleto: string;
 }
 
-const API_URL = "https://neuralup-java-3.onrender.com/";
+const API_URL = "https://login-java.onrender.com";
 
 async function request<T>(url: string, options?: RequestInit): Promise<T> {
-  const response = await fetch(url, options);
+  try {
+    const response = await fetch(url, {
+      ...options,
+      credentials: "include", 
+    });
 
-  if (!response.ok) {
-    const errorData = (await response.json()) as { error?: string; message?: string };
-    const message = errorData.error || errorData.message || "Erro inesperado";
-    throw new Error(message);
+    // Caso 401 ou 403: retorna erro específico
+    if (response.status === 401) {
+      throw new Error("E-mail ou senha inválidos.");
+    }
+    if (response.status === 403) {
+      throw new Error("Acesso negado.");
+    }
+
+    if (!response.ok) {
+      let message = "Erro inesperado";
+
+      try {
+        const errorJson = await response.json();
+        message =
+          errorJson.error ||
+          errorJson.message ||
+          JSON.stringify(errorJson) ||
+          message;
+      } catch (err: unknown) {
+        console.error("Erro na requisição:", err);
+      }
+
+      throw new Error(message);
+    }
+
+    return response.json() as Promise<T>;
+  } catch (err: unknown) {
+    console.error("Erro na requisição:", err);
+    if (err instanceof TypeError) {
+      // Erro de rede / CORS
+      throw new Error(
+        "Falha ao conectar com o servidor. Verifique se a API está online."
+      );
+    }
+    throw err;
   }
-
-  return (await response.json()) as T;
 }
 
 export const usuarioApi = {
@@ -41,27 +71,10 @@ export const usuarioApi = {
     }),
 
   criarUsuario: (data: Usuario) =>
-    request<Usuario>(`${API_URL}/usuario`, {
+    request<LoginResponse>(`${API_URL}/usuario/cadastrar`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     }),
-
-  getUsuario: (email: string) =>
-    request<Usuario>(`${API_URL}/usuario/${email}`),
-
-  getUsuarios: () =>
-    request<Usuario[]>(`${API_URL}/usuario`),
-
-  updateUsuario: (email: string, data: Partial<Usuario>) =>
-    request<Usuario>(`${API_URL}/usuario/${email}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    }),
-
-  deleteUsuario: (email: string) =>
-    request<{ success: boolean }>(`${API_URL}/usuario/${email}`, {
-      method: "DELETE",
-    }),
 };
+

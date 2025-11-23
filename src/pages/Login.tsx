@@ -14,7 +14,7 @@ import { useTheme } from "../context/useTheme";
 import { usuarioApi } from "../api/JavaApi";
 
 interface FormState {
-  nome: string;
+  nomeCompleto: string;
   email: string;
   senha: string;
   confirmarSenha: string;
@@ -30,9 +30,14 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const { name, value, type, checked } = e.target;
+  setForm(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
+};
+
 
   const [form, setForm] = useState<FormState>({
-    nome: "",
+    nomeCompleto: "",
     email: "",
     senha: "",
     confirmarSenha: "",
@@ -40,57 +45,63 @@ export default function Login() {
     aceitarTermos: false,
   });
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) navigate("/", { replace: true });
-  }, [navigate]);
+    // Evita redirecionamento automático enquanto o usuário está tentando se registrar
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      // só redireciona automaticamente se tiver token e não estiver no cadastro
+      if (token && !isRegister) {
+        navigate("/", { replace: true });
+      }
+    }, [navigate, isRegister]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-    setForm({ ...form, [name]: type === "checkbox" ? checked : value });
-  };
+    const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+      setMsg("");
+      setLoading(true);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setMsg("");
-    setLoading(true);
+      try {
+        let result;
 
-    try {
-      if (isRegister) {
-        if (form.senha !== form.confirmarSenha) {
-          throw new Error("As senhas não coincidem.");
+        if (isRegister) {
+          // valida senha
+          if (form.senha !== form.confirmarSenha) {
+            throw new Error("As senhas não coincidem.");
+          }
+
+          const novoUsuario = {
+            nomeCompleto: form.nomeCompleto,
+            email: form.email,
+            senha: form.senha,
+            dataNascimento: form.dataNascimento,
+          };
+
+          result = await usuarioApi.criarUsuario(novoUsuario);
+
+        } else {
+          result = await usuarioApi.login({
+            email: form.email,
+            senha: form.senha,
+          });
         }
 
-        const novoUsuario = {
-          nome: form.nome,
-          email: form.email,
-          senha: form.senha,
-          dataNascimento: form.dataNascimento,
-          aceitarTermos: form.aceitarTermos,
-        };
-
-        const result = await usuarioApi.criarUsuario(novoUsuario);
-
-        localStorage.setItem("token", "LOGADO"); // ajuste se seu backend retornar token
-        localStorage.setItem("nome", result.nome.split(" ")[0]);
-      } else {
-        const result = await usuarioApi.login({
-          email: form.email,
-          senha: form.senha,
-        });
-
+        // Salva token e nome
         localStorage.setItem("token", result.token);
-        localStorage.setItem("nome", result.nome);
-      }
+        localStorage.setItem("nome", result.nomeCompleto);
 
-      navigate("/");
-    } catch (err) {
-      if (err instanceof Error) setMsg(err.message);
-      else setMsg("Erro inesperado.");
-    } finally {
-      setLoading(false);
-    }
-  };
+        // Redireciona manualmente para a home
+        navigate("/", { replace: true });
+
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setMsg(err.message);
+        } else {
+          setMsg("Erro inesperado.");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
 
   return (
     <div
@@ -128,6 +139,7 @@ export default function Login() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {isRegister && (
               <>
+                {/* Nome */}
                 <div>
                   <label className="text-sm font-medium">Nome completo</label>
                   <div
@@ -140,8 +152,8 @@ export default function Login() {
                     <FiUser className="text-gray-300" />
                     <input
                       type="text"
-                      name="nome"
-                      value={form.nome}
+                      name="nomeCompleto"
+                      value={form.nomeCompleto}
                       onChange={handleChange}
                       className="w-full p-2 outline-none bg-transparent text-current"
                       required
@@ -149,6 +161,7 @@ export default function Login() {
                   </div>
                 </div>
 
+                {/* Data de nascimento */}
                 <div>
                   <label className="text-sm font-medium">
                     Data de nascimento
@@ -174,7 +187,7 @@ export default function Login() {
               </>
             )}
 
-            {/* E-mail */}
+            {/* Email */}
             <div>
               <label className="text-sm font-medium">E-mail</label>
               <div
@@ -225,60 +238,61 @@ export default function Login() {
               </div>
             </div>
 
+            {/* Confirmação senha */}
             {isRegister && (
-              <>
-                <div>
-                  <label className="text-sm font-medium">
-                    Confirmação de senha
-                  </label>
-                  <div
-                    className={`flex items-center border rounded-lg px-3 ${
-                      isDark
-                        ? "border-[#2A2A2A] bg-[#1A1A1A]"
-                        : "border-gray-300 bg-white"
-                    }`}
-                  >
-                    <FiLock className="text-gray-300" />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      name="confirmarSenha"
-                      value={form.confirmarSenha}
-                      onChange={handleChange}
-                      className="w-full p-2 outline-none bg-transparent text-current"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 text-sm">
+              <div>
+                <label className="text-sm font-medium">
+                  Confirmação de senha
+                </label>
+                <div
+                  className={`flex items-center border rounded-lg px-3 ${
+                    isDark
+                      ? "border-[#2A2A2A] bg-[#1A1A1A]"
+                      : "border-gray-300 bg-white"
+                  }`}
+                >
+                  <FiLock className="text-gray-300" />
                   <input
-                    type="checkbox"
-                    name="aceitarTermos"
-                    checked={form.aceitarTermos}
+                    type={showPassword ? "text" : "password"}
+                    name="confirmarSenha"
+                    value={form.confirmarSenha}
                     onChange={handleChange}
+                    className="w-full p-2 outline-none bg-transparent text-current"
                     required
                   />
-                  <label>
-                    Aceito os{" "}
-                    <Link to="/termos" className="text-indigo-600 underline">
-                      Termos de Uso
-                    </Link>{" "}
-                    e{" "}
-                    <Link
-                      to="/privacidade"
-                      className="text-indigo-600 underline"
-                    >
-                      Política de Privacidade
-                    </Link>
-                  </label>
                 </div>
-              </>
+              </div>
             )}
 
+            {/* Termos */}
+            {isRegister && (
+              <div className="flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  name="aceitarTermos"
+                  checked={form.aceitarTermos}
+                  onChange={handleChange}
+                  required
+                />
+                <label>
+                  Aceito os{" "}
+                  <Link to="/termos" className="text-indigo-600 underline">
+                    Termos de Uso
+                  </Link>{" "}
+                  e{" "}
+                  <Link to="/privacidade" className="text-indigo-600 underline">
+                    Política de Privacidade
+                  </Link>
+                </label>
+              </div>
+            )}
+
+            {/* Erros */}
             {msg && (
               <p className="text-center text-red-500 text-sm">{msg}</p>
             )}
 
+            {/* Botão */}
             <button
               type="submit"
               className={`w-full py-2 rounded-lg font-medium ${
@@ -296,6 +310,7 @@ export default function Login() {
             </button>
           </form>
 
+          {/* Alternar login/cadastro */}
           <p
             className={`text-sm text-center mt-5 ${
               isDark ? "text-gray-300" : "text-gray-600"
