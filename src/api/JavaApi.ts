@@ -24,7 +24,6 @@ async function request<T>(url: string, options?: RequestInit): Promise<T> {
       credentials: "include", 
     });
 
-    // Caso 401 ou 403: retorna erro específico
     if (response.status === 401) {
       throw new Error("E-mail ou senha inválidos.");
     }

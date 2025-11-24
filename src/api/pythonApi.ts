@@ -1,22 +1,37 @@
 // src/api/pythonApi.ts
-
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "https://noraia-sm77.onrender.com", 
+  baseURL: import.meta.env.VITE_API_URL,
+  timeout: 10000, 
 });
 
-// Inicia uma nova conversa no backend
-export const startChat = async () => {
-  const response = await api.post("/chat/start");
-  return response.data;
+const handleError = (error: unknown) => {
+  if (axios.isAxiosError(error)) {
+    console.error("Erro na API:", error.response?.data || error.message);
+  } else {
+    console.error("Erro desconhecido:", error);
+  }
+  throw error; 
 };
 
-// Envia uma resposta do usuário para a API
+export const startChat = async () => {
+  try {
+    const response = await api.post("/chat/start");
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
+};
+
 export const submitAnswer = async (sessionId: string, answer: string) => {
-  const response = await api.post("/chat/answer", {
-    session_id: sessionId,
-    answer,
-  });
-  return response.data;
+  try {
+    const response = await api.post("/chat/answer", {
+      session_id: sessionId,
+      answer,
+    });
+    return response.data;
+  } catch (error) {
+    handleError(error);
+  }
 };
