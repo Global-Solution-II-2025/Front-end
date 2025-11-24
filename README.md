@@ -120,11 +120,12 @@ PROJETO-PRINCIPAL/
 ## 📌 Endpoints / Fluxo Principal
 
 Arquivo funcão - Etapa
-1	npm run dev
-2	/Home - Página home
-3	/NoraIA - Página NoraIA
-4	/NoraIA - Responder perguntas
-5	/NoraIA - Verificar Área 
+-	npm run dev
+-	/Login - Página Login
+- /Home - Página Home
+-	/NoraIA - Página NoraIA
+-	/NoraIA - Responder perguntas
+-	/NoraIA - Verificar Área 
 
 ## 📌 Autores e Créditos
 
@@ -145,17 +146,26 @@ Especialista em desenvolvimento API e fanático por Java.
 
 ## 📌 Screenshots / Demonstração
 
+  Chatbot Nora realizando avaliação com perguntas:
+  ![alt text](./src/assets/img/demonstration/demonstracao1.png)
+
+  Login
+  ![alt text](./src/assets/img/demonstration/demonstracao2.png)
+
+  Cadastro
+  ![alt text](./src/assets/img/demonstration/demonstracao3.png)
 
 
 ## 📌 Contato
+### Email:
+- 📧 britoarthur150@gmail.com
+- 📧 luizfelipeflosi@gmail.com
+- 📧 pbrum191@gmail.com
 
-📧 britoarthur150@gmail.com
-📧 luizfelipeflosi@gmail.com
-📧 pbrum191@gmail.com
-
-💼 LinkedIn: https://www.linkedin.com/in/arthur-brito-da-silva-06658b276/
-💼 LinkedIn: https://www.linkedin.com/in/felipeflosii/
-💼 LinkedIn: https://www.linkedin.com/in/pedro-brum-66a31b326/
+### LinkedIn:
+- 💼 LinkedIn: https://www.linkedin.com/in/arthur-brito-da-silva-06658b276/
+- 💼 LinkedIn: https://www.linkedin.com/in/felipeflosii/
+- 💼 LinkedIn: https://www.linkedin.com/in/pedro-brum-66a31b326/
 
 ## 🌐 Links
 

@@ -7,8 +7,8 @@ import Flosi from "../assets/img/flosi.jpg";
 
 const integrantes: Integrante[] = [
   {
-    name: "Arthur Brito",
-    role: "Desenvolvedor Frontend e Database",
+    name: "Arthur Brito da Silva",
+    role: "RM562085 - 1TDSPG",
     description:
       "Desenvolvedor frontend, responsável pela modelagem e manutenção do banco de dados e documentação geral do projeto.",
     image: Brito,
@@ -16,8 +16,8 @@ const integrantes: Integrante[] = [
     linkedin: "https://www.linkedin.com/in/arthur-brito-da-silva-06658b276/",
   },
   {
-    name: "Luiz Felipe Flosi",
-    role: "Tech Lead do projeto e API",
+    name: "Luiz Felipe Flosi dos Santos",
+    role: "RM563197 - 1TDSPG",
     description:
       "Tech Lead do projeto NeuralUp, desenvolvedor frontend, responsável pelo desenvolvimento da API de python e integrações das APIs.",
     image: Flosi,
@@ -25,8 +25,8 @@ const integrantes: Integrante[] = [
     linkedin: "https://www.linkedin.com/in/felipeflosii/",
   },
   {
-    name: "Pedro Henrique Brum",
-    role: "Desenvolvedor Backend e Chatbot",
+    name: "Pedro Henrique Brum Lopes",
+    role: "RM561780 - 1TDSPG",
     description: "Desenvolvedor backend Java e responsável pelo desenvolvimento do chatbot.",
     image: Brum,
     github: "https://github.com/PedroBrum-DEV",
@@ -67,11 +67,11 @@ export default function Integrantes() {
                 src={member.image}
                 alt={member.name}
                 className={`w-full h-full object-cover ${
-                      member.name === "Pedro Henrique Brum"
+                      member.name === "Pedro Henrique Brum Lopes"
                     ? "scale-125 -translate-y-4"
-                    : member.name === "Luiz Felipe Flosi"
+                    : member.name === "Luiz Felipe Flosi dos Santos"
                     ? "scale-120"
-                    : member.name === "Arthur Brito"
+                    : member.name === "Arthur Brito da Silva"
                     ? "scale-120 object-top" 
                     : ""
                 }`}
