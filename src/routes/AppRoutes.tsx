@@ -1,37 +1,45 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home";
-import Trilhas from "../pages/Trilhas";
-import Cursos from "../pages/Cursos";
-import Inteligencia from "../pages/Inteligencia";
-import Sobre from "../pages/Sobre";
+import Cursos from "../pages/News";
+import Sobre from "../pages/About";
 import Login from "../pages/Login";
-import Termos from "../pages/Termos";
-import Privacidade from "../pages/Privacidade";
+import Termos from "../pages/Terms";
+import Privacidade from "../pages/Privacy";
+import FAQ from "../pages/faq";
+import Integrantes from "../pages/Members";
+import Contact from "../pages/Contact";
+import Chatbot from "../pages/NoraIA";
+import Dashboard from "../pages/Dashboard";
 
 export default function AppRoutes() {
   const isLoggedIn = localStorage.getItem("token");
 
   return (
     <Routes>
-      {/* Login fora do layout */}
+      {/* Login sem layout */}
       <Route path="/login" element={<Login />} />
 
-      {/* Rotas protegidas */}
+      {/* Termos e Privacidade sem layout App */}
+      <Route path="/termos" element={<Termos />} />
+      <Route path="/privacidade" element={<Privacidade />} />
+
+      {/* Rotas com layout App*/}
       <Route
         path="/"
         element={isLoggedIn ? <App /> : <Navigate to="/login" replace />}
       >
         <Route index element={<Home />} />
-        <Route path="trilhas" element={<Trilhas />} />
+        <Route path="chatbot" element={<Chatbot />} />
         <Route path="cursos" element={<Cursos />} />
-        <Route path="ia" element={<Inteligencia />} />
         <Route path="sobre" element={<Sobre />} />
-        <Route path="termos" element={<Termos />} />
-        <Route path="privacidade" element={<Privacidade />} />
+        <Route path="faq" element={<FAQ />} />
+        <Route path="integrantes" element={<Integrantes />} />
+        <Route path="contato" element={<Contact />} />
+        <Route path="dashboard" element={<Dashboard />} />
       </Route>
 
-      {/* Redireciona tudo que não existe */}
+      {/* Redirecionamento */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
