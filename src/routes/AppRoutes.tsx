@@ -17,10 +17,14 @@ export default function AppRoutes() {
 
   return (
     <Routes>
-      {/* Login fora do layout */}
+      {/* Login sem layout */}
       <Route path="/login" element={<Login />} />
 
-      {/* Rotas protegidas */}
+      {/* Termos e Privacidade sem layout App */}
+      <Route path="/termos" element={<Termos />} />
+      <Route path="/privacidade" element={<Privacidade />} />
+
+      {/* Rotas com layout App*/}
       <Route
         path="/"
         element={isLoggedIn ? <App /> : <Navigate to="/login" replace />}
@@ -29,15 +33,13 @@ export default function AppRoutes() {
         <Route path="chatbot" element={<Chatbot />} />
         <Route path="cursos" element={<Cursos />} />
         <Route path="sobre" element={<Sobre />} />
-        <Route path="termos" element={<Termos />} />
-        <Route path="privacidade" element={<Privacidade />} />
         <Route path="faq" element={<FAQ />} />
         <Route path="integrantes" element={<Integrantes />} />
         <Route path="contato" element={<Contact />} />
         <Route path="dashboard" element={<Dashboard />} />
       </Route>
 
-      {/* Redireciona tudo que não existe */}
+      {/* Redirecionamento */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

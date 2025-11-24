@@ -1,162 +1,166 @@
-# 💡 Portal de Aprendizado Inteligente (Upskilling/Reskilling com IA)
+# 🧠 NeuralUp — Sistema de Análise e Treinamento Neural
 
-Plataforma web que recomenda trilhas de aprendizado personalizadas para o usuário, com base em seus interesses e perfil profissional, utilizando uma IA simples de recomendação.
+## 📌 Título e Descrição
 
----
+**NeuralUp**  
 
-## 👩‍💻 Equipe
+NeuralUp é um sistema que identifica a área de atuação mais compatível com o perfil de cada pessoa e recomenda cursos para desenvolver as habilidades necessárias, ajudando no crescimento profissional de forma prática e personalizada.
 
-| Integrante | Função Principal | Função Secundária |
-|-------------|------------------|-------------------|
-| **Pedro Brum** | Backend com **Java (Quarkus)** e integração com IA | Comunicação entre APIs |
-| **Arthur Brito** | **Banco de Dados Oracle** e estrutura base do Frontend | Criação de páginas e componentes |
-| **Felipe Flosi** | **Python (IA e recomendação inteligente)** | Frontend (rotas e integração com API) |
+## 📌 Status do Projeto
 
----
+🚧 Concluído para entrega
 
-## ⚙️ Tecnologias Utilizadas
+## 📌 Sumário
 
-### 🧠 Inteligência Artificial
-- **Python 3.10+**
-- **FastAPI**
-- **scikit-learn** (ou lógica simples de recomendação)
-- **Requests / JSON para integração**
+- Sobre o Projeto
+- Tecnologias Utilizadas
+- Instalação
+- Como Usar
+- Estrutura de Pastas
+- Endpoints / Fluxo Principal
+- Autores e Créditos
+- Screenshots / Demonstração
+- Contato
+- Links (GitHub e YouTube)
 
-### 🧩 Backend (API)
-- **Java com Quarkus**
-- **JWT** para autenticação
-- **RESTful API**
-- **Integração com Python e Oracle**
+## 📌 Sobre o Projeto
 
-### 🗃️ Banco de Dados
-- **Oracle Database**
-- Tabelas principais:
-  - `usuarios`
-  - `cursos`
-  - `categorias`
-  - `inscricoes`
-  - `trilhas`
+O **NeuralUp** tem como objetivo identificar a área de atuação mais adequada para cada pessoa com base em seu perfil, além de recomendar cursos para desenvolvimento de habilidades necessárias. Criado para orientação profissional e aprendizado personalizado, o sistema permite:
 
-### 💻 Frontend
-- **React + Vite**
-- **TypeScript**
-- **TailwindCSS**
-- **Axios** para comunicação com API
-- **React Router DOM**
+- Análise de perfil do usuário
+- Identificação da área de atuação mais compatível
+- Sugestão de cursos para aprimoramento
+- Acompanhamento do progresso e aprendizado
 
----
+## 📌 Tecnologias Utilizadas
 
-## 🗓️ Cronograma de Desenvolvimento (7 Dias)
+- Banco de dados Oracle
+- Python para API do bot
+- Java para API de login e cadastro
+- React
+- Vite
 
-### **🧭 Dia 1 — Planejamento e Setup de Ambientes**
-**Objetivo:** Definir arquitetura e preparar ambientes.
+## 📌 Instalação
 
-- Criar repositório no GitHub com Git Flow (`main`, `develop`, `feature/…`)
-- Configurar ambiente:
-  - `/frontend` (React + Vite + Tailwind)
-  - `/backend-java` (Quarkus)
-  - `/ia-python` (FastAPI)
-- Testar build local de cada parte
-- Criar README inicial e definir responsabilidades
+git clone https://github.com/Global-Solution-II-2025/Front-end.git
+npm i
 
-📌 **Responsáveis:**
-- Pedro → Estrutura da API Quarkus  
-- Arthur → Setup frontend + BD Oracle  
-- Felipe → Ambiente Python + API mock  
+## 📌 Como Usar
 
----
+- npm run dev
+- acessar a página da Nora IA
+- responder perguntas de acordo com a opinião do usuário
+- verificar área de atuação mais adequada para o usuário do sistema
 
-### **🧭 Dia 2 — Modelagem e Banco de Dados**
-**Objetivo:** Criar e integrar o banco de dados Oracle.
+## 📌 Estrutura de Pastas
 
-- Modelagem ER: `usuarios`, `cursos`, `categorias`, `inscricoes`, `trilhas`
-- Script SQL base e criação no Oracle
-- Conexão entre Quarkus e Oracle
-- Criação de entidades (Java e Python, se necessário)
+```md
+PROJETO-PRINCIPAL/
+├── node_modules/
+├── public/
+│   └── favicon.png
+├── src/
+│   ├── api/
+│   │   ├── JavaApi.ts
+│   │   ├── newsApi.ts
+│   │   └── pythonApi.ts
+│   ├── assets/
+│   │   └── img/
+│   │       ├── brito.jpg
+│   │       ├── brum.jpeg
+│   │       ├── flosi.jpg
+│   │       ├── login-bg.jpg
+│   │       └── noraia.png
+│   ├── components/
+│   │   ├── layout/
+│   │   │   ├── Footer.tsx
+│   │   │   └── Header.tsx
+│   │   │   ├── Menu.tsx
+│   │   ├── ui/
+│   │   │   └── Message.tsx
+│   │   ├── context/
+│   │   ├── ThemeContext.tsx
+│   │   └── useTheme.ts
+│   ├── pages/
+│   │   ├── About.tsx
+│   │   ├── Contact.tsx
+│   │   ├── Dashboard.tsx
+│   │   ├── Faq.tsx
+│   │   ├── Home.tsx
+│   │   ├── Login.tsx
+│   │   ├── Members.tsx
+│   │   ├── News.tsx
+│   │   ├── NoraIA.tsx
+│   │   ├── Privacy.tsx
+│   │   └── Terms.tsx
+│   ├── routes/
+│   │   └── AppRoutes.tsx
+│   ├── types/
+│   │   ├── gnews.d.ts
+│   │   ├── integrantes.ts
+│   │   └── themeContext.ts
+│   ├── App.tsx
+│   └──global.css
+│   └── main.tsx
+├── .env
+├── .eslintignore
+├── .eslintrc.json
+├── index.html
+├── package-lock.json
+├── package.json
+├── postcss.config.cjs
+├── README.md
+├── tailwind.config.js
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+```
 
-📌 **Responsáveis:**
-- Pedro → Modelos e entidades Java  
-- Arthur → Banco Oracle e integração  
-- Felipe → Teste de dados mock  
+## 📌 Endpoints / Fluxo Principal
 
----
+Arquivo funcão - Etapa
+1	npm run dev
+2	/Home - Página home
+3	/NoraIA - Página NoraIA
+4	/NoraIA - Responder perguntas
+5	/NoraIA - Verificar Área 
 
-### **🧭 Dia 3 — Backend (API Quarkus + Endpoints principais)**
-**Objetivo:** Criar endpoints e autenticação.
+## 📌 Autores e Créditos
 
-- Endpoints:
-  - `POST /auth/register`  
-  - `POST /auth/login`  
-  - `GET /cursos` e `POST /cursos` (admin)  
-  - `GET /usuarios/{id}` e `PUT /usuarios/{id}`
-- JWT básico  
-- Testar no Postman  
+Arthur Brito da Silva
+FIAP • ADS 1º Ano - 2° Semestre
+Desenvolvedor Frontend e Database
+Desenvolvedor frontend, responsável pela modelagem e manutenção do banco de dados e documentação geral do projeto.
 
-📌 **Responsáveis:**
-- Pedro → Implementação e segurança  
-- Arthur → Testes no BD  
-- Felipe → Testes de integração  
+Luiz Felipe Flosi dos Santos
+FIAP • ADS 1º Ano - 2° Semestre
+Tech Lead do projeto e API
+Tech Lead do projeto NeuralUp, desenvolvedor frontend, responsável pelo desenvolvimento da API de python e integrações das APIs.
 
----
+Pedro Henrique Brum Lopes
+FIAP • ADS 1º Ano - 2° Semestre
+Desenvolvedor Backend
+Especialista em desenvolvimento API e fanático por Java.
 
-### **🧭 Dia 4 — Frontend Base**
-**Objetivo:** Estrutura de navegação e interface.
+## 📌 Screenshots / Demonstração
 
-- Criar páginas: Login, Cadastro, Dashboard, Cursos  
-- Criar componentes: Header, Sidebar, Cards  
-- Configurar rotas com React Router  
-- Conectar API de login e cursos  
 
-📌 **Responsáveis:**
-- Arthur e Felipe → Desenvolvimento das páginas  
-- Pedro → Suporte de endpoints  
 
----
+## 📌 Contato
 
-### **🧭 Dia 5 — IA e Recomendação**
-**Objetivo:** Implementar recomendador inteligente.
+📧 britoarthur150@gmail.com
+📧 luizfelipeflosi@gmail.com
+📧 pbrum191@gmail.com
 
-- Criar script Python que sugere cursos por perfil
-- Endpoint Python `/recomendar/{user_id}`
-- Integração Quarkus → Python (requisição HTTP)
-- Mock de respostas no frontend  
+💼 LinkedIn: https://www.linkedin.com/in/arthur-brito-da-silva-06658b276/
+💼 LinkedIn: https://www.linkedin.com/in/felipeflosii/
+💼 LinkedIn: https://www.linkedin.com/in/pedro-brum-66a31b326/
 
-📌 **Responsáveis:**
-- Pedro → Comunicação entre APIs  
-- Felipe → IA e lógica de recomendação  
-- Arthur → Base de dados de cursos  
+## 🌐 Links
 
----
+🔗 GitHub
+https://github.com/Global-Solution-II-2025/Front-end
 
-### **🧭 Dia 6 — Integração e Ajustes**
-**Objetivo:** Testar fluxo completo e refinar design.
-
-- Conectar Frontend → API → IA  
-- Ajustar UI com Tailwind  
-- Testar login, listagem e recomendação  
-- Criar trilhas dinâmicas personalizadas  
-
-📌 **Responsáveis:**
-- Pedro → Integração final  
-- Arthur → Dashboard e design  
-- Felipe → Testes e IA  
-
----
-
-### **🧭 Dia 7 — Finalização e Entrega**
-**Objetivo:** Finalizar, revisar e documentar.
-
-- Criar README final com instruções e autores  
-- Criar vídeo demo ou slides de apresentação  
-- Revisar UX/UI e responsividade  
-- Subir versão final (deploy)
-
-📌 **Responsáveis:**
-- Pedro → Deploy do backend  
-- Arthur → Deploy do frontend  
-- Felipe → Documentação da IA e testes finais  
-
----
-
-## 🧱 Estrutura do Projeto
-
+🎥 Vídeo no YouTube
+https://youtube.com/seu-video

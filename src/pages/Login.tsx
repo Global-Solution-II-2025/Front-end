@@ -30,11 +30,6 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const { name, value, type, checked } = e.target;
-  setForm(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
-};
-
 
   const [form, setForm] = useState<FormState>({
     nomeCompleto: "",
@@ -45,62 +40,64 @@ export default function Login() {
     aceitarTermos: false,
   });
 
-    // Evita redirecionamento automático enquanto o usuário está tentando se registrar
-    useEffect(() => {
-      const token = localStorage.getItem("token");
-      // só redireciona automaticamente se tiver token e não estiver no cadastro
-      if (token && !isRegister) {
-        navigate("/", { replace: true });
-      }
-    }, [navigate, isRegister]);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setForm(prev => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
+  };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-      e.preventDefault();
-      setMsg("");
-      setLoading(true);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/", { replace: true });
+    }
+  }, [navigate]);
 
-      try {
-        let result;
 
-        if (isRegister) {
-          // valida senha
-          if (form.senha !== form.confirmarSenha) {
-            throw new Error("As senhas não coincidem.");
-          }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMsg("");
+    setLoading(true);
 
-          const novoUsuario = {
-            nomeCompleto: form.nomeCompleto,
-            email: form.email,
-            senha: form.senha,
-            dataNascimento: form.dataNascimento,
-          };
+    try {
+      let result;
 
-          result = await usuarioApi.criarUsuario(novoUsuario);
-
-        } else {
-          result = await usuarioApi.login({
-            email: form.email,
-            senha: form.senha,
-          });
+      if (isRegister) {
+        if (form.senha !== form.confirmarSenha) {
+          throw new Error("As senhas não coincidem.");
         }
 
-        // Salva token e nome
-        localStorage.setItem("token", result.token);
-        localStorage.setItem("nome", result.nomeCompleto);
+        const novoUsuario = {
+          nomeCompleto: form.nomeCompleto,
+          email: form.email,
+          senha: form.senha,
+          dataNascimento: form.dataNascimento,
+        };
 
-        // Redireciona manualmente para a home
-        navigate("/", { replace: true });
-
-      } catch (err: unknown) {
-        if (err instanceof Error) {
-          setMsg(err.message);
-        } else {
-          setMsg("Erro inesperado.");
-        }
-      } finally {
-        setLoading(false);
+        result = await usuarioApi.criarUsuario(novoUsuario);
+      } else {
+        result = await usuarioApi.login({
+          email: form.email,
+          senha: form.senha,
+        });
       }
-    };
+
+      // Salva token e nome
+      localStorage.setItem("token", result.token);
+      localStorage.setItem("nome", result.nomeCompleto);
+
+      // Vai direto para a home sem piscar
+      navigate("/", { replace: true });
+
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setMsg(err.message);
+      } else {
+        setMsg("Erro inesperado.");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return (

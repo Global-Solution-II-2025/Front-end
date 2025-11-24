@@ -8,26 +8,26 @@ import Flosi from "../assets/img/flosi.jpg";
 const integrantes: Integrante[] = [
   {
     name: "Arthur Brito",
-    role: "Desenvolvedor Frontend",
+    role: "Desenvolvedor Frontend e Database",
     description:
-      "Apaixonado por tecnologia e UX, focado em criar interfaces limpas e interativas.",
+      "Desenvolvedor frontend, responsável pela modelagem e manutenção do banco de dados e documentação geral do projeto.",
     image: Brito,
     github: "https://github.com/thubrito",
     linkedin: "https://www.linkedin.com/in/arthur-brito-da-silva-06658b276/",
   },
   {
     name: "Luiz Felipe Flosi",
-    role: "Desenvolvedor Backend",
+    role: "Tech Lead do projeto e API",
     description:
-      "Especialista em sistemas e implementação de API, garantindo que tudo funcione de forma escalável.",
+      "Tech Lead do projeto NeuralUp, desenvolvedor frontend, responsável pelo desenvolvimento da API de python e integrações das APIs.",
     image: Flosi,
     github: "https://github.com/felipeflosii",
     linkedin: "https://www.linkedin.com/in/felipeflosii/",
   },
   {
     name: "Pedro Henrique Brum",
-    role: "Desenvolvedor Backend",
-    description: "Especialista em desenvolvimento API e fanático por Java.",
+    role: "Desenvolvedor Backend e Chatbot",
+    description: "Desenvolvedor backend Java e responsável pelo desenvolvimento do chatbot.",
     image: Brum,
     github: "https://github.com/PedroBrum-DEV",
     linkedin: "https://www.linkedin.com/in/pedro-brum-66a31b326/"
@@ -48,7 +48,7 @@ export default function Integrantes() {
           isDark ? "text-gray-200" : "text-indigo-600"
         }`}
       >
-        Nossa Equipe 🚀
+        Nossa Equipe
       </h1>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">

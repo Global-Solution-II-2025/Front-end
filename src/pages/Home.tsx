@@ -33,14 +33,14 @@ export default function Home() {
 
         <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-4">
           <a
-            href="/trilhas"
+            href="/dashboard"
             className={`font-medium px-6 py-3 rounded-full w-full sm:w-auto text-center transition-colors duration-500 ${
               isDark
                 ? "bg-[#00A67E] text-gray-100 hover:bg-[#007a5e]"
                 : "bg-blue-600 text-white hover:bg-blue-700"
             }`}
           >
-            Montar rotina
+            Ver dashboard
           </a>
           <a
             href="/cursos"
@@ -274,7 +274,7 @@ export default function Home() {
         </p>
 
         <a
-          href="/trilhas"
+          href="/chatbot"
           className={`px-8 py-4 rounded-full text-lg font-medium transition-colors duration-500 ${
             isDark
               ? "bg-[#00A67E] text-white hover:bg-[#007a5e]"

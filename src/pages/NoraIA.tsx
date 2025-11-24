@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import Message from "../components/ui/Message";
 import { useTheme } from "../context/useTheme";
 import { Bot, Loader2 } from "lucide-react";
@@ -33,14 +33,17 @@ interface ChatState {
 export default function Chatbot() {
   const { isDark } = useTheme();
 
-  const API_BASE = import.meta.env.VITE_API_URL || "https://noraia-sm77.onrender.com";
+  const API_BASE =
+    import.meta.env.VITE_API_URL || "https://noraia-sm77.onrender.com";
 
   const [sessionId] = useState(() =>
     Math.random().toString(36).substring(2, 9)
   );
 
   const [chatState, setChatState] = useState<ChatState | null>(null);
-  const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>([]);
+  const [messages, setMessages] = useState<
+    { text: string; isUser: boolean }[]
+  >([]);
   const [loading, setLoading] = useState(false);
 
   const aiName = "Nora";
@@ -48,20 +51,16 @@ export default function Chatbot() {
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
+  // Auto scroll
   useEffect(() => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+      messagesEndRef.current.scrollTop =
+        messagesEndRef.current.scrollHeight;
     }
   }, [messages]);
 
-
-  useEffect(() => {
-    initChat();
-  }, []);
-
-
-
-  const initChat = async () => {
+  // INITCHAT ESTABILIZADO
+  const initChat = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`${API_BASE}/questions`);
@@ -102,12 +101,20 @@ export default function Chatbot() {
     } catch (err) {
       console.error("initChat error:", err);
       setMessages([
-        { text: "Erro ao conectar ao servidor. Tente novamente mais tarde.", isUser: false },
+        {
+          text: "Erro ao conectar ao servidor. Tente novamente mais tarde.",
+          isUser: false,
+        },
       ]);
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_BASE, sessionId]);
+
+  // USE EFFECT CORRIGIDO
+  useEffect(() => {
+    initChat();
+  }, [initChat]);
 
   const handleAnswer = async (scoreValue: number) => {
     if (!chatState) return;
@@ -120,7 +127,10 @@ export default function Chatbot() {
       { text: `Escolho ${scoreValue}`, isUser: true },
     ]);
 
-    const newScores = [...scores, { area_id: question.area_id ?? 0, score: scoreValue }];
+    const newScores = [
+      ...scores,
+      { area_id: question.area_id ?? 0, score: scoreValue },
+    ];
 
     const isLast = currentIndex + 1 >= questions.length;
 
@@ -161,19 +171,31 @@ export default function Chatbot() {
         console.error("POST /responses failed:", postRes.status, errText);
         setMessages((prev) => [
           ...prev,
-          { text: "Erro ao salvar suas respostas. Tente novamente.", isUser: false },
+          {
+            text: "Erro ao salvar suas respostas. Tente novamente.",
+            isUser: false,
+          },
         ]);
         setLoading(false);
         return;
       }
 
-      const resultsRes = await fetch(`${API_BASE}/results/${encodeURIComponent(sessionId)}`);
+      const resultsRes = await fetch(
+        `${API_BASE}/results/${encodeURIComponent(sessionId)}`
+      );
       if (!resultsRes.ok) {
         const errText = await safeReadText(resultsRes);
-        console.error("GET /results failed:", resultsRes.status, errText);
+        console.error(
+          "GET /results failed:",
+          resultsRes.status,
+          errText
+        );
         setMessages((prev) => [
           ...prev,
-          { text: "Erro ao recuperar resultados. Tente novamente.", isUser: false },
+          {
+            text: "Erro ao recuperar resultados. Tente novamente.",
+            isUser: false,
+          },
         ]);
         setLoading(false);
         return;
@@ -191,10 +213,15 @@ export default function Chatbot() {
       if (best.length === 0) {
         setMessages((prev) => [
           ...prev,
-          { text: "Teste finalizado. Não foi possível determinar uma área.", isUser: false },
+          {
+            text: "Teste finalizado. Não foi possível determinar uma área.",
+            isUser: false,
+          },
         ]);
       } else {
-        const names = best.map((b: ResultArea) => b.area_name).join(", ");
+        const names = best
+          .map((b: ResultArea) => b.area_name)
+          .join(", ");
         setMessages((prev) => [
           ...prev,
           { text: `🎯 Sua melhor área é: ${names}`, isUser: false },
@@ -204,7 +231,10 @@ export default function Chatbot() {
       console.error("finalize error:", err);
       setMessages((prev) => [
         ...prev,
-        { text: "Erro no processo final. Tente novamente.", isUser: false },
+        {
+          text: "Erro no processo final. Tente novamente.",
+          isUser: false,
+        },
       ]);
     } finally {
       setLoading(false);

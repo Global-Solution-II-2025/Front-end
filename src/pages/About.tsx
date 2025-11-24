@@ -136,7 +136,7 @@ export default function About() {
                 outerRadius={100}
                 label
               >
-                {distribuicaoAprendizagem.map((entry, index) => (
+                {distribuicaoAprendizagem.map((_entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={cores[index % cores.length]}
