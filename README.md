@@ -173,4 +173,7 @@ Especialista em desenvolvimento API e fanático por Java.
 https://github.com/Global-Solution-II-2025/Front-end
 
 🎥 Vídeo no YouTube
-https://youtube.com/seu-video
+https://youtu.be/3B28NFcrJ3c
+
+🔗 Vercel
+https://front-end-orpin-zeta-76.vercel.app/
